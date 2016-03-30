@@ -1,6 +1,18 @@
 package model;
 
-public class Livro {
+import java.util.Date;
 
-	private int teste;
+public class Livro {
+	
+	String titulo;
+	String autor;
+	String ISBN;
+	String categoria;
+	String editora;
+	String resumo;
+	double preco;
+	String formatoLivro;
+	int numPaginas;
+	Date dataPublicacao;
+	String indice;
 }
