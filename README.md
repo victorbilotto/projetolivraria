@@ -6,5 +6,5 @@
 * Jefferson Augusto Lopes
 * Rafael Moreira
 * Romulo Ilbert
-* ThaÃ­s Obana
-* Victor Bilotto de Lima
+* Thaís Obana
+* Victor Bilotto
