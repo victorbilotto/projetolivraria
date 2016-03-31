@@ -10,4 +10,5 @@ public interface DAOLivro {
 	public List<Livro> pesquisarAutor(String autor);
 	public List<Livro> pesquisarEditora(String editora);
 	public List<Livro> pesquisarCategoria(String categoria);
+	public void adicionarLivro(Livro l);
 }

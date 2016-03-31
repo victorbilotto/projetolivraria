@@ -141,4 +141,15 @@ public class DAOLivroImpl implements DAOLivro{
 		return lista;
 	}
 
+	@Override
+	public void adicionarLivro(Livro l) {
+		
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = stringConexao;
+        String sql = "insert into livro values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement ps = new 
+        SqlCommand cmd = new SqlCommand(sql, conn);
+        conn.Open();
+	}
+
 }
