@@ -2,6 +2,8 @@ package Controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import DAO.DAOLivro;
 import DAO.DAOLivroImpl;
@@ -20,7 +22,7 @@ public class ControleLivro {
 		l.setCategoria(categoria);
 		l.setEditora(editora);
 		l.setResumo(resumo);
-		l.setPreco(Float.parseFloat(preco));
+		l.setPreco(Double.parseDouble(preco));
 		l.setFormatoLivro(formato);
 		l.setNumPaginas(Integer.parseInt(paginas));
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -29,5 +31,14 @@ public class ControleLivro {
 		l.setIndice(indice);
 		DAOLivro dao = new DAOLivroImpl();
 		dao.adicionarLivro(l);
+	}
+	
+	public List<Livro> pesquisarLivros(String nome){
+		List<Livro> lista = new ArrayList<Livro>();
+		DAOLivro dao = new DAOLivroImpl();
+		lista = dao.pesquisarTitulo(nome);
+		
+		return lista;
+		
 	}
 }

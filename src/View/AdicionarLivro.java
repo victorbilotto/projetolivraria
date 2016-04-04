@@ -166,6 +166,7 @@ public class AdicionarLivro extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				ControleLivro cl = new ControleLivro();
 
+				System.out.println("Oi");
 				try {
 					cl.adicionarLivro( tfTitulo.getText(), tfAutor.getText(), tfISBN.getText(), tfCategoria.getText(),
 							tfEditora.getText(), tfResumo.getText(), tfPreco.getText(), tfFormato.getText(), 
