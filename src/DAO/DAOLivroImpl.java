@@ -215,14 +215,14 @@ public class DAOLivroImpl implements DAOLivro{
 
 
 	@Override
-	public void remover(int codigo) {
+	public void remover(String isbn) {
 		try {
 			Connection con =  DataBaseConnection.getConnection();
 
 			final String delete  ="DELETE FROM livro WHERE codigo =(?)";
 
 			PreparedStatement stm = con.prepareStatement( delete );
-			stm.setLong(1, codigo );
+			stm.setString(1, isbn );
 			
 			stm.executeUpdate();
 			con.close();

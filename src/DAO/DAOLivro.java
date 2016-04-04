@@ -12,6 +12,6 @@ public interface DAOLivro {
 	public List<Livro> pesquisarCategoria(String categoria);
 	public void adicionarLivro(Livro l);
 	public void atualizar( Livro l);
-	public void remover( int codigo );
+	public void remover( String isbn);
 
 }

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -20,6 +21,7 @@ public class ExcluirLivro extends JFrame {
 	private JPanel contentPane;
 	private JTextField tfNome;
 	private JTable tabelaLivros;
+	private JButton btnExcluir;
 
 	/**
 	 * Launch the application.
@@ -57,8 +59,7 @@ public class ExcluirLivro extends JFrame {
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				ControleLivro cl = new ControleLivro();
-				
+				ControleLivro cl = new ControleLivro();				
 				cl.pesquisarLivros(tfNome.getText());
 				
 			}
@@ -69,5 +70,21 @@ public class ExcluirLivro extends JFrame {
 		tabelaLivros = new JTable();
 		tabelaLivros.setBounds(10, 61, 663, 325);
 		contentPane.add(tabelaLivros);
+		
+		btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControleLivro cl = new ControleLivro();	
+				int selecionada = tabelaLivros.getSelectedRow();
+				if (selecionada == -1) {
+				    return; 
+				}
+				String isbn = tabelaLivros.getValueAt(selecionada, 2).toString();	
+				cl.excluirLivro( isbn );
+				JOptionPane.showMessageDialog(null, "Usuário excluido");
+			}
+		});
+		btnExcluir.setBounds(10, 411, 89, 23);
+		contentPane.add(btnExcluir);
 	}
 }
