@@ -201,7 +201,7 @@ public class AdicionarLivro extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setDefaultCloseOperation(AdicionarLivro.DISPOSE_ON_CLOSE);
+				
 			}
 		});
 		btnCancelar.setBounds(452, 427, 89, 23);
