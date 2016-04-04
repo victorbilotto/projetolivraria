@@ -174,4 +174,62 @@ public class DAOLivroImpl implements DAOLivro{
 
 	}
 
+	@Override
+	public void atualizar(Livro l) {
+		try {
+			Connection con =  DataBaseConnection.getConnection();
+			final String atualiza ="UPDATE livro" +
+					"titulo = ?" +
+					"autor = ?" +
+					"ISBN = ?" +
+					"categoria = ?" +
+					"editora = ?" +
+					"resumo = ?" +
+					"formatoLivro = ?"+
+					"numPaginas = ?"+
+					"dataPublicacao =?"+
+					"indice = ?"+
+					" WHERE codigo = ?";
+
+			PreparedStatement stm = con.prepareStatement( atualiza );
+			
+			stm.setString(1, l.getTitulo());
+			stm.setString(2, l.getAutor());
+			stm.setString(3, l.getISBN());
+			stm.setString(4, l.getCategoria());
+			stm.setString(5, l.getEditora());
+			stm.setString(6, l.getResumo());
+			stm.setDouble(7, l.getPreco());
+			stm.setString(8, l.getFormatoLivro());
+			stm.setInt(9, l.getNumPaginas());
+			stm.setDate(10, new java.sql.Date(l.getDataPublicacao().getTime()));
+			stm.setString(11, l.getIndice());
+			
+			stm.executeUpdate();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		
+	}
+
+
+	@Override
+	public void remover(int codigo) {
+		try {
+			Connection con =  DataBaseConnection.getConnection();
+
+			final String delete  ="DELETE FROM livro WHERE codigo =(?)";
+
+			PreparedStatement stm = con.prepareStatement( delete );
+			stm.setLong(1, codigo );
+			
+			stm.executeUpdate();
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 }
