@@ -13,7 +13,12 @@ private static Connection con;
 				Class.forName("com.mysql.jdbc.Driver");
 			}			
 			try {
-				con = DriverManager.getConnection("jdbc:jtds:sqlserver://127.0.0.1:1433;DatabaseName=comicstore","root","01041994");
+				String serverName = "216.172.172.167:3306"; //caminho do servidor do BD
+			    String mydatabase = "bmedi691_projetolivraria"; //nome banco de dados 
+			    String url = "jdbc:mysql://" + serverName + "/" + mydatabase; 
+			    String username = "bmedi691_pluser"; //nome de usuário do BD 
+			    String password = "a123456"; //senha de acesso 
+			    con = DriverManager.getConnection(url, username, password);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -23,5 +28,7 @@ private static Connection con;
 		
 		return con;		
 	}
+	
+	
 	
 }

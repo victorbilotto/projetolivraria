@@ -243,7 +243,7 @@ public class DAOLivroImpl implements DAOLivro{
 				l.setTitulo(rs.getString("titulo"));
 				l.setAutor(rs.getString("autor"));
 				l.setISBN(rs.getString("ISBN"));
-				l.setCategoria(rs.getString("categoria"));
+				l.setCategoria(rs.getString("categoria"));	
 				l.setEditora(rs.getString("editora"));
 				l.setResumo(rs.getString("resumo"));
 				l.setPreco((Double.parseDouble( rs.getString( "preco" ))));
