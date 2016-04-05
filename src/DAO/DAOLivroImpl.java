@@ -219,7 +219,7 @@ public class DAOLivroImpl implements DAOLivro{
 		try {
 			Connection con =  DataBaseConnection.getConnection();
 
-			final String delete  ="DELETE FROM livro WHERE codigo =(?)";
+			final String delete  ="DELETE FROM livro WHERE isbn =(?)";
 
 			PreparedStatement stm = con.prepareStatement( delete );
 			stm.setString(1, isbn );
