@@ -5,16 +5,23 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+import javax.swing.JTable;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import DAO.DAOLivro;
 import DAO.DAOLivroImpl;
+import View.AlterarLivro;
 import model.Livro;
 
-public class ControleLivro implements TableModel{
+public class ControleLivro extends JFrame{
+	
+	private JTable tabela;
 
 	List<Livro> lista = new ArrayList<Livro>();
+
 	 
 	public void adicionarLivro(String titulo, String autor, String ISBN, String categoria, String editora,
 			String resumo, String preco, String formato, String paginas, String data, String indice) throws ParseException{
@@ -29,100 +36,89 @@ public class ControleLivro implements TableModel{
 		l.setPreco(Double.parseDouble(preco));
 		l.setFormatoLivro(formato);
 		l.setNumPaginas(Integer.parseInt(paginas));
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		java.sql.Date date = new java.sql.Date(format.parse(data).getTime());
-		l.setDataPublicacao(date);
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			l.setDataPublicacao(sdf.parse(data));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		l.setIndice(indice);
 		DAOLivro dao = new DAOLivroImpl();
 		dao.adicionarLivro(l);
 	}
-	
 	public List<Livro> pesquisarLivros(String nome){
 		
 		DAOLivro dao = new DAOLivroImpl();
 		lista = dao.pesquisarTitulo(nome);
 		
-		
-		return getLivros();
-		
-	}
-
-	@Override
-	public void addTableModelListener(TableModelListener l) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Class<?> getColumnClass(int columnIndex) {
-		switch (columnIndex) { 
-		case 0 : return String.class;
-		case 1 : return String.class;
-		case 2 : return String.class;
-		case 3 : return String.class;
-		case 4 : return String.class;
-		default : return String.class;
-	}
-	}
-
-	@Override
-	public int getColumnCount() {
-		return 4;
-	}
-
-	@Override
-	public String getColumnName(int columnIndex) {
-		switch (columnIndex) { 
-		case 0 : return "Titulo";
-		case 1 : return "ISBN";
-		case 2 : return "Editora";
-		case 3 : return "Autor";
-		default : return "";
-	}
-
-	}
-
-	@Override
-	public int getRowCount() {
-		return getLivros().size();
-	}
-
-	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		Livro l = getLivros().get( rowIndex );
-		switch (columnIndex) { 
-			case 0 : return l.getTitulo();
-			case 1 : return l.getISBN();
-			case 2 : return l.getEditora();
-			case 3 : return l.getAutor();
-			default : return "";
-		}
-	}
-
-	@Override
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void removeTableModelListener(TableModelListener l) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public List<Livro> getLivros(){
 		return lista;
+		
 	}
 	
 	public void excluirLivro(String isbn){
 		DAOLivro dao = new DAOLivroImpl();
 		dao.remover(isbn);
+	}
+	
+	public void alterar(String titulo, String autor, String ISBN, String categoria, String editora,
+			String resumo, String preco, String formato, String paginas, String data, String indice)
+		{
+		Livro l = new Livro();
+		l.setTitulo(titulo);
+		l.setAutor(autor);
+		l.setISBN(ISBN);
+		l.setCategoria(categoria);
+		l.setEditora(editora);
+		l.setResumo(resumo);
+		l.setPreco(Double.parseDouble(preco));
+		l.setFormatoLivro(formato);
+		l.setNumPaginas(Integer.parseInt(paginas));
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			l.setDataPublicacao(sdf.parse(data));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		l.setIndice(indice);
+		DAOLivro dao = new DAOLivroImpl();
+		dao.atualizar(l);
+		}
+	
+	public JTable populaTabela(String titulo)
+	{
+		DAOLivro dao = new DAOLivroImpl();
+		List<Livro> listaLivro = dao.pesquisarTitulo(titulo);
+		tabela = new JTable();
+		tabela.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"Titulo", "ISBN", "Autor", "Editora"
+				}
+				));
+		
+		DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+		if(modelo.getRowCount() > 0 ){
+			modelo.setRowCount(0);
+		}
+		
+		for(Livro l: listaLivro){
+			Object[] objeto = new Object[4];
+			objeto[0] = l.getTitulo();
+			objeto[1] = l.getISBN();
+			objeto[2] = l.getAutor();
+			objeto[3] = l.getEditora();
+			modelo.addRow(objeto);
+		}
+		
+		return tabela;
+	}
+	public void alteraEscolhido(String isbn){
+		DAOLivro dao = new DAOLivroImpl();
+		Livro l = new Livro();
+		l = dao.pesquisa(isbn);
+		AlterarLivro al = new AlterarLivro();
+		al.setVisible(true);
 	}
 }

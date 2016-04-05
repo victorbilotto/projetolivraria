@@ -1,6 +1,5 @@
 package View;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,16 +7,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controller.ControleLivro;
-import model.Livro;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
-public class AdicionarLivro extends JFrame {
+public class AlterarLivro extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfTitulo;
@@ -31,7 +28,6 @@ public class AdicionarLivro extends JFrame {
 	private JTextField tfPaginas;
 	private JTextField tfData;
 	private JTextField tfIndice;
-	private JFrame frmNovo;
 
 
 	/**
@@ -41,7 +37,7 @@ public class AdicionarLivro extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AdicionarLivro frame = new AdicionarLivro();
+					AlterarLivro frame = new AlterarLivro();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,7 +49,7 @@ public class AdicionarLivro extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AdicionarLivro() {
+	public AlterarLivro() {
 		setTitle("Adicionar Livro");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 570, 500);
@@ -61,6 +57,8 @@ public class AdicionarLivro extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		ControleLivro cl = new ControleLivro();
 		
 		JLabel lblTitulo = new JLabel("Titulo:");
 		lblTitulo.setBounds(10, 23, 46, 14);
@@ -161,50 +159,19 @@ public class AdicionarLivro extends JFrame {
 		contentPane.add(tfIndice);
 		tfIndice.setColumns(10);
 		
-		JButton btnAdicionar = new JButton("Adicionar");
-		btnAdicionar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		
+		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0){
 				ControleLivro cl = new ControleLivro();
 
-				try {
-					cl.adicionarLivro( tfTitulo.getText(), tfAutor.getText(), tfISBN.getText(), tfCategoria.getText(),
-							tfEditora.getText(), tfResumo.getText(), tfPreco.getText(), tfFormato.getText(), 
-							tfPaginas.getText(), tfData.getText(), tfIndice.getText() );
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				cl.alterar( tfTitulo.getText(), tfAutor.getText(), tfISBN.getText(), tfCategoria.getText(),
+						tfEditora.getText(), tfResumo.getText(), tfPreco.getText(), tfFormato.getText(), 
+						tfPaginas.getText(), tfData.getText(), tfIndice.getText() );
 			}
 		});
-		btnAdicionar.setBounds(10, 427, 89, 23);
-		contentPane.add(btnAdicionar);
-		
-		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				tfTitulo.setText("");
-				tfAutor.setText("");
-				tfISBN.setText("");
-				tfCategoria.setText("");
-				tfEditora.setText("");
-				tfResumo.setText("");
-				tfPreco.setText("");
-				tfFormato.setText("");
-				tfPaginas.setText("");
-				tfData.setText("");
-				tfIndice.setText("");
-			}
-		});
-		btnLimpar.setBounds(246, 427, 89, 23);
-		contentPane.add(btnLimpar);
-		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		btnCancelar.setBounds(452, 427, 89, 23);
-		contentPane.add(btnCancelar);
+		btnAlterar.setBounds(10, 427, 89, 23);
+		contentPane.add(btnAlterar);
 	}
+	
 }

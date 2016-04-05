@@ -13,5 +13,5 @@ public interface DAOLivro {
 	public void adicionarLivro(Livro l);
 	public void atualizar( Livro l);
 	public void remover( String isbn);
-
+	public Livro pesquisa(String isbn);
 }

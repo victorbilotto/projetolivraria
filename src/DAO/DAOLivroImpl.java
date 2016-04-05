@@ -18,8 +18,8 @@ public class DAOLivroImpl implements DAOLivro{
 	final String pesqPorEditora = "SELECT * FROM livro where editora like ?";
 	final String insert ="INSERT INTO Livro" +
 			"(titulo, autor, ISBN, categoria, editora, resumo, preco, formatoLivro, numPaginas, dataPublicacao, indice) " +
-			"values (?,?,?,?,?,?,?,?)";
-	
+			"values (?,?,?,?,?,?,?,?,?,?,?)";
+	final String pesquisaUnica = "SELECT * FROM livro where isbn like ?";
 	
 	@Override
 	public List<Livro> pesquisarTitulo(String titulo) {
@@ -230,6 +230,32 @@ public class DAOLivroImpl implements DAOLivro{
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public Livro pesquisa(String isbn){
+		Connection con = DataBaseConnection.getConnection();
+		Livro l = new Livro();
+		try{
+			PreparedStatement stm = con.prepareStatement( pesquisaUnica );
+			stm.setString(1, "%" + isbn +"%");
+			ResultSet rs = stm.executeQuery();
+				
+				l.setTitulo(rs.getString("titulo"));
+				l.setAutor(rs.getString("autor"));
+				l.setISBN(rs.getString("ISBN"));
+				l.setCategoria(rs.getString("categoria"));
+				l.setEditora(rs.getString("editora"));
+				l.setResumo(rs.getString("resumo"));
+				l.setPreco((Double.parseDouble( rs.getString( "preco" ))));
+				l.setFormatoLivro(rs.getString("formatoLivro"));
+				l.setNumPaginas(Integer.parseInt(rs.getString("numPaginas")));
+				l.setDataPublicacao(rs.getDate("dataPublicacao"));
+				l.setIndice(rs.getString("indice"));
+		}catch(Exception e){
+			
+		}
+			
+		return l;
 	}
 
 }

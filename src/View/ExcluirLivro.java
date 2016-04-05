@@ -15,13 +15,17 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
 
 public class ExcluirLivro extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfNome;
-	private JTable tabelaLivros;
 	private JButton btnExcluir;
+	private JTable tabelaLivros;
+	private JScrollPane sp_tbl_livro;
 
 	/**
 	 * Launch the application.
@@ -50,8 +54,10 @@ public class ExcluirLivro extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		ControleLivro cl = new ControleLivro();
+		
 		tfNome = new JTextField();
-		tfNome.setBounds(10, 11, 533, 20);
+		tfNome.setBounds(65, 11, 478, 20);
 		contentPane.add(tfNome);
 		tfNome.setColumns(10);
 		
@@ -60,16 +66,11 @@ public class ExcluirLivro extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				ControleLivro cl = new ControleLivro();				
-				cl.pesquisarLivros(tfNome.getText());
-				
+				tabelaLivros = cl.populaTabela(tfNome.getText());
 			}
 		});
 		btnPesquisar.setBounds(584, 10, 89, 23);
 		contentPane.add(btnPesquisar);
-		
-		tabelaLivros = new JTable();
-		tabelaLivros.setBounds(10, 61, 663, 325);
-		contentPane.add(tabelaLivros);
 		
 		btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
@@ -86,5 +87,23 @@ public class ExcluirLivro extends JFrame {
 		});
 		btnExcluir.setBounds(10, 411, 89, 23);
 		contentPane.add(btnExcluir);
+		
+		JLabel lblTitulo = new JLabel("Titulo:");
+		lblTitulo.setBounds(10, 14, 46, 14);
+		contentPane.add(lblTitulo);
+		
+		sp_tbl_livro = new JScrollPane();
+		sp_tbl_livro.setBounds(10, 39, 659, 367);
+		contentPane.add(sp_tbl_livro);
+		
+		tabelaLivros = new JTable();
+		sp_tbl_livro.setViewportView(tabelaLivros);
+		tabelaLivros.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Titulo", "ISBN", "Autor", "Editora"
+			}
+		));
 	}
 }
