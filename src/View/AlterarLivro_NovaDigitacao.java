@@ -10,17 +10,21 @@ import javax.swing.border.EmptyBorder;
 import Controller.ControleLivro;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
 
-public class AlterarPesquisa extends JFrame {
+public class AlterarLivro_NovaDigitacao extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfTitulo;
 	private JTable tabelaLivros;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -29,7 +33,7 @@ public class AlterarPesquisa extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AlterarPesquisa frame = new AlterarPesquisa();
+					AlterarLivro_NovaDigitacao frame = new AlterarLivro_NovaDigitacao();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +45,7 @@ public class AlterarPesquisa extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AlterarPesquisa() {
+	public AlterarLivro_NovaDigitacao() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 625, 443);
 		contentPane = new JPanel();
@@ -63,16 +67,30 @@ public class AlterarPesquisa extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				ControleLivro cl = new ControleLivro();				
-				cl.pesquisarLivros(tfTitulo.getText());
-				tabelaLivros.revalidate();
+				cl.populaTabela(tfTitulo.getText(), tabelaLivros);
+				
 			}
 		});
 		btnPesquisar.setBounds(510, 7, 89, 23);
 		contentPane.add(btnPesquisar);
 		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 47, 589, 289);
+		contentPane.add(scrollPane);
+		
 		tabelaLivros = new JTable();
-		tabelaLivros.setBounds(10, 47, 589, 289);
-		contentPane.add(tabelaLivros);
+		tabelaLivros.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Titulo", "ISBN", "Autor", "Editora"
+			}
+		));
+		tabelaLivros.getColumnModel().getColumn(0).setPreferredWidth(298);
+		tabelaLivros.getColumnModel().getColumn(1).setPreferredWidth(123);
+		tabelaLivros.getColumnModel().getColumn(2).setPreferredWidth(95);
+		tabelaLivros.getColumnModel().getColumn(3).setPreferredWidth(106);
+		scrollPane.setViewportView(tabelaLivros);
 		
 		JButton btnAlterar = new JButton("Alterar");
 		btnAlterar.addActionListener(new ActionListener() {
@@ -83,8 +101,7 @@ public class AlterarPesquisa extends JFrame {
 				if (selecionada == -1) {
 				    return; 
 				}
-				String escolhido = tabelaLivros.getValueAt(selecionada, 2).toString();
-				
+				String escolhido = tabelaLivros.getValueAt(selecionada, 1).toString();
 				cl.alteraEscolhido(escolhido);
 			}
 		});

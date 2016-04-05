@@ -3,6 +3,8 @@ package DAO;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import Connection.DataBaseConnection;
 
 import java.sql.*;
@@ -19,6 +21,18 @@ public class DAOLivroImpl implements DAOLivro{
 	final String insert ="INSERT INTO livro" +
 			"(titulo, autor, ISBN, categoria, editora, resumo, preco, formatoLivro, numPaginas, dataPublicacao, indice) " +
 			"values (?,?,?,?,?,?,?,?,?,?,?)";
+	final String atualiza ="UPDATE livro SET" +
+			" titulo = ?," +
+			" autor = ?," +
+			" categoria = ?," +
+			" editora = ?," +
+			" resumo = ?," +
+			" preco = ?," +
+			" formatoLivro = ?,"+
+			" numPaginas = ?,"+
+			" dataPublicacao =?,"+
+			" indice = ?"+
+			" WHERE ISBN = ?";
 	final String pesquisaUnica = "SELECT * FROM livro where isbn like ?";
 	
 	@Override
@@ -178,38 +192,26 @@ public class DAOLivroImpl implements DAOLivro{
 	public void atualizar(Livro l) {
 		try {
 			Connection con =  DataBaseConnection.getConnection();
-			final String atualiza ="UPDATE livro" +
-					"titulo = ?" +
-					"autor = ?" +
-					"ISBN = ?" +
-					"categoria = ?" +
-					"editora = ?" +
-					"resumo = ?" +
-					"formatoLivro = ?"+
-					"numPaginas = ?"+
-					"dataPublicacao =?"+
-					"indice = ?"+
-					" WHERE codigo = ?";
-
-			PreparedStatement stm = con.prepareStatement( atualiza );
 			
+			PreparedStatement stm = con.prepareStatement( atualiza );			
 			stm.setString(1, l.getTitulo());
 			stm.setString(2, l.getAutor());
-			stm.setString(3, l.getISBN());
-			stm.setString(4, l.getCategoria());
-			stm.setString(5, l.getEditora());
-			stm.setString(6, l.getResumo());
-			stm.setDouble(7, l.getPreco());
-			stm.setString(8, l.getFormatoLivro());
-			stm.setInt(9, l.getNumPaginas());
-			stm.setDate(10, new java.sql.Date(l.getDataPublicacao().getTime()));
-			stm.setString(11, l.getIndice());
-			
+			stm.setString(3, l.getCategoria());
+			stm.setString(4, l.getEditora());
+			stm.setString(5, l.getResumo());
+			stm.setDouble(6, l.getPreco());
+			stm.setString(7, l.getFormatoLivro());
+			stm.setInt(8, l.getNumPaginas());
+			stm.setDate(9, new java.sql.Date(l.getDataPublicacao().getTime()));
+			stm.setString(10, l.getIndice());
+			stm.setString(11, l.getISBN());
 			stm.executeUpdate();
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}	
+		}		
+		
+
 		
 	}
 
@@ -235,15 +237,16 @@ public class DAOLivroImpl implements DAOLivro{
 	public Livro pesquisa(String isbn){
 		Connection con = DataBaseConnection.getConnection();
 		Livro l = new Livro();
-		try{
-			PreparedStatement stm = con.prepareStatement( pesquisaUnica );
-			stm.setString(1, "%" + isbn +"%");
-			ResultSet rs = stm.executeQuery();
-				
+		PreparedStatement pt;
+		try {
+			pt =  con.prepareStatement(pesquisaUnica);
+			pt.setString(1, isbn);
+			ResultSet rs = pt.executeQuery();
+			while(rs.next()){
 				l.setTitulo(rs.getString("titulo"));
 				l.setAutor(rs.getString("autor"));
 				l.setISBN(rs.getString("ISBN"));
-				l.setCategoria(rs.getString("categoria"));	
+				l.setCategoria(rs.getString("categoria"));
 				l.setEditora(rs.getString("editora"));
 				l.setResumo(rs.getString("resumo"));
 				l.setPreco((Double.parseDouble( rs.getString( "preco" ))));
@@ -251,10 +254,11 @@ public class DAOLivroImpl implements DAOLivro{
 				l.setNumPaginas(Integer.parseInt(rs.getString("numPaginas")));
 				l.setDataPublicacao(rs.getDate("dataPublicacao"));
 				l.setIndice(rs.getString("indice"));
-		}catch(Exception e){
-			
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-			
 		return l;
 	}
 

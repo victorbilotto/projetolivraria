@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
@@ -13,7 +14,7 @@ import javax.swing.table.TableModel;
 
 import DAO.DAOLivro;
 import DAO.DAOLivroImpl;
-import View.AlterarLivro;
+import View.AlterarLivro_Pesquisa;
 import model.Livro;
 
 public class ControleLivro extends JFrame{
@@ -117,7 +118,9 @@ public class ControleLivro extends JFrame{
 		DAOLivro dao = new DAOLivroImpl();
 		Livro l = new Livro();
 		l = dao.pesquisa(isbn);
-		AlterarLivro al = new AlterarLivro();
+		AlterarLivro_Pesquisa al = new AlterarLivro_Pesquisa(l.getTitulo(),l.getAutor(), l.getISBN(),l.getCategoria(),
+				l.getEditora(), l.getResumo(), l.getPreco(), l.getFormatoLivro(), l.getNumPaginas(), l.getDataPublicacao(),
+				l.getIndice());
 		al.setVisible(true);
 	}
 }
