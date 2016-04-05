@@ -16,7 +16,7 @@ public class DAOLivroImpl implements DAOLivro{
 	final String pesqPorCategoria = "SELECT * FROM livro where categoria like ?";
 	final String pesqPorAutor = "SELECT * FROM livro where autor like ?";
 	final String pesqPorEditora = "SELECT * FROM livro where editora like ?";
-	final String insert ="INSERT INTO Livro" +
+	final String insert ="INSERT INTO livro" +
 			"(titulo, autor, ISBN, categoria, editora, resumo, preco, formatoLivro, numPaginas, dataPublicacao, indice) " +
 			"values (?,?,?,?,?,?,?,?,?,?,?)";
 	final String pesquisaUnica = "SELECT * FROM livro where isbn like ?";

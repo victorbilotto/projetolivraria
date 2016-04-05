@@ -56,7 +56,6 @@ public class ExcluirLivro extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
 		ControleLivro cl = new ControleLivro();
 		
 		tfNome = new JTextField();
@@ -67,23 +66,9 @@ public class ExcluirLivro extends JFrame {
 		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				List<Livro> lista = new ArrayList<Livro>();
-				ControleLivro cl = new ControleLivro();				
-				lista = cl.pesquisarLivros(tfNome.getText());
+				ControleLivro cl = new ControleLivro();	
+				cl.populaTabela(tfNome.getText(), tabelaLivros);
 				
-				DefaultTableModel modelo = (DefaultTableModel) tabelaLivros.getModel();
-				if(modelo.getRowCount() > 0 ){
-					modelo.setRowCount(0);
-				}
-				
-				for(Livro l: lista){
-					Object[] objeto = new Object[4];
-					objeto[0] = l.getTitulo();
-					objeto[1] = l.getISBN();
-					objeto[2] = l.getAutor();
-					objeto[3] = l.getEditora();
-					modelo.addRow(objeto);
-				}
 			}
 		});
 		btnPesquisar.setBounds(584, 10, 89, 23);
@@ -97,9 +82,9 @@ public class ExcluirLivro extends JFrame {
 				if (selecionada == -1) {
 				    return; 
 				}
-				String isbn = tabelaLivros.getValueAt(selecionada, 2).toString();	
+				String isbn = tabelaLivros.getValueAt(selecionada, 1).toString();	
 				cl.excluirLivro( isbn );
-				JOptionPane.showMessageDialog(null, "Usuário excluido");
+				JOptionPane.showMessageDialog(null, "Livro excluido com sucesso");
 			}
 		});
 		btnExcluir.setBounds(10, 411, 89, 23);
@@ -122,5 +107,6 @@ public class ExcluirLivro extends JFrame {
 				"Titulo", "ISBN", "Autor", "Editora"
 			}
 		));
+		
 	}
 }

@@ -85,19 +85,19 @@ public class ControleLivro extends JFrame{
 		dao.atualizar(l);
 		}
 	
-	public JTable populaTabela(String titulo)
+	public void populaTabela(String titulo, JTable tabela)
 	{
-		DAOLivro dao = new DAOLivroImpl();
-		List<Livro> listaLivro = dao.pesquisarTitulo(titulo);
-		tabela = new JTable();
 		tabela.setModel(new DefaultTableModel(
+
 				new Object[][] {
 				},
 				new String[] {
 					"Titulo", "ISBN", "Autor", "Editora"
 				}
 				));
-		
+		DAOLivro dao = new DAOLivroImpl();
+		List<Livro> listaLivro = dao.pesquisarTitulo(titulo);
+
 		DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
 		if(modelo.getRowCount() > 0 ){
 			modelo.setRowCount(0);
@@ -112,7 +112,6 @@ public class ControleLivro extends JFrame{
 			modelo.addRow(objeto);
 		}
 		
-		return tabela;
 	}
 	public void alteraEscolhido(String isbn){
 		DAOLivro dao = new DAOLivroImpl();
