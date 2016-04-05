@@ -9,11 +9,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controller.ControleLivro;
+import model.Livro;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
@@ -64,9 +67,23 @@ public class ExcluirLivro extends JFrame {
 		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				List<Livro> lista = new ArrayList<Livro>();
 				ControleLivro cl = new ControleLivro();				
-				tabelaLivros = cl.populaTabela(tfNome.getText());
+				lista = cl.pesquisarLivros(tfNome.getText());
+				
+				DefaultTableModel modelo = (DefaultTableModel) tabelaLivros.getModel();
+				if(modelo.getRowCount() > 0 ){
+					modelo.setRowCount(0);
+				}
+				
+				for(Livro l: lista){
+					Object[] objeto = new Object[4];
+					objeto[0] = l.getTitulo();
+					objeto[1] = l.getISBN();
+					objeto[2] = l.getAutor();
+					objeto[3] = l.getEditora();
+					modelo.addRow(objeto);
+				}
 			}
 		});
 		btnPesquisar.setBounds(584, 10, 89, 23);
