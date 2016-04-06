@@ -14,7 +14,7 @@ import javax.swing.table.TableModel;
 
 import DAO.DAOLivro;
 import DAO.DAOLivroImpl;
-import View.AlterarLivro_Pesquisa;
+import View.AlterarLivroObjeto;
 import model.Livro;
 
 public class ControleLivro extends JFrame{
@@ -118,7 +118,7 @@ public class ControleLivro extends JFrame{
 		DAOLivro dao = new DAOLivroImpl();
 		Livro l = new Livro();
 		l = dao.pesquisa(isbn);
-		AlterarLivro_Pesquisa al = new AlterarLivro_Pesquisa(l.getTitulo(),l.getAutor(), l.getISBN(),l.getCategoria(),
+		AlterarLivroObjeto al = new AlterarLivroObjeto(l.getTitulo(),l.getAutor(), l.getISBN(),l.getCategoria(),
 				l.getEditora(), l.getResumo(), l.getPreco(), l.getFormatoLivro(), l.getNumPaginas(), l.getDataPublicacao(),
 				l.getIndice());
 		al.setVisible(true);

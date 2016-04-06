@@ -19,7 +19,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
-public class AlterarLivro_NovaDigitacao extends JFrame {
+public class AlterarLivroPesquisa extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfTitulo;
@@ -33,7 +33,7 @@ public class AlterarLivro_NovaDigitacao extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AlterarLivro_NovaDigitacao frame = new AlterarLivro_NovaDigitacao();
+					AlterarLivroPesquisa frame = new AlterarLivroPesquisa();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +45,7 @@ public class AlterarLivro_NovaDigitacao extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AlterarLivro_NovaDigitacao() {
+	public AlterarLivroPesquisa() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 625, 443);
 		contentPane = new JPanel();

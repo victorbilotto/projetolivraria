@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 
-public class AlterarLivro_Pesquisa extends JFrame {
+public class AlterarLivroObjeto extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfTitulo;
@@ -40,7 +40,7 @@ public class AlterarLivro_Pesquisa extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AlterarLivro_Pesquisa frame = new AlterarLivro_Pesquisa(null, null, null,null, null, null,0.0, 
+					AlterarLivroObjeto frame = new AlterarLivroObjeto(null, null, null,null, null, null,0.0, 
 																			null, 0,null, null);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -53,7 +53,7 @@ public class AlterarLivro_Pesquisa extends JFrame {
 	
 	String data;
 	
-	public AlterarLivro_Pesquisa(String titulo, String autor, String ISBN, String categoria, String editora,
+	public AlterarLivroObjeto(String titulo, String autor, String ISBN, String categoria, String editora,
 			String resumo, double preco, String formato, int paginas, Date date, String indice) {
 		setTitle("Adicionar Livro");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
