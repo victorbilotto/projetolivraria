@@ -1,6 +1,5 @@
 package View;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,7 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controller.ControleLivro;
-import model.Livro;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -31,8 +29,6 @@ public class AdicionarLivro extends JFrame {
 	private JTextField tfPaginas;
 	private JTextField tfData;
 	private JTextField tfIndice;
-	private JFrame frmNovo;
-
 
 	/**
 	 * Launch the application.
@@ -195,16 +191,7 @@ public class AdicionarLivro extends JFrame {
 				tfIndice.setText("");
 			}
 		});
-		btnLimpar.setBounds(246, 427, 89, 23);
+		btnLimpar.setBounds(455, 427, 89, 23);
 		contentPane.add(btnLimpar);
-		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		btnCancelar.setBounds(452, 427, 89, 23);
-		contentPane.add(btnCancelar);
 	}
 }

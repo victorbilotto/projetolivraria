@@ -80,6 +80,7 @@ public class AlterarLivroPesquisa extends JFrame {
 		
 		tabelaLivros = new JTable();
 		tabelaLivros.setModel(new DefaultTableModel(
+
 			new Object[][] {
 			},
 			new String[] {

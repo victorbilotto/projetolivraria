@@ -26,7 +26,6 @@ public class ControleLivro extends JFrame{
 	 
 	public void adicionarLivro(String titulo, String autor, String ISBN, String categoria, String editora,
 			String resumo, String preco, String formato, String paginas, String data, String indice) throws ParseException{
-		
 		Livro l = new Livro();
 		l.setTitulo(titulo);
 		l.setAutor(autor);
