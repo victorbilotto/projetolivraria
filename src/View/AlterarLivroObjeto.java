@@ -123,6 +123,7 @@ public class AlterarLivroObjeto extends JFrame {
 		tfAutor.setText(autor);
 		
 		tfISBN = new JTextField();
+		tfISBN.setEditable(false);
 		tfISBN.setBounds(84, 70, 225, 20);
 		contentPane.add(tfISBN);
 		tfISBN.setColumns(10);
