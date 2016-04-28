@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
@@ -103,7 +104,12 @@ public class AlterarLivroPesquisa extends JFrame {
 				    return; 
 				}
 				String escolhido = tabelaLivros.getValueAt(selecionada, 1).toString();
-				cl.alteraEscolhido(escolhido);
+				try {
+					cl.alteraEscolhido(escolhido);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnAlterar.setBounds(10, 370, 89, 23);

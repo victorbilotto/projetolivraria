@@ -113,12 +113,18 @@ public class ControleLivro extends JFrame{
 		}
 		
 	}
-	public void alteraEscolhido(String isbn){
+	public void alteraEscolhido(String isbn) throws ParseException{
 		DAOLivro dao = new DAOLivroImpl();
 		Livro l = new Livro();
 		l = dao.pesquisa(isbn);
+		
+		SimpleDateFormat in= new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy");
+		String result = out.format(in.parse(String.valueOf(l.getDataPublicacao())));  
+		
+		
 		AlterarLivroObjeto al = new AlterarLivroObjeto(l.getTitulo(),l.getAutor(), l.getISBN(),l.getCategoria(),
-				l.getEditora(), l.getResumo(), l.getPreco(), l.getFormatoLivro(), l.getNumPaginas(), l.getDataPublicacao(),
+				l.getEditora(), l.getResumo(), l.getPreco(), l.getFormatoLivro(), l.getNumPaginas(), result,
 				l.getIndice());
 		al.setVisible(true);
 	}

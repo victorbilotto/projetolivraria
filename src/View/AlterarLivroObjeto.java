@@ -17,6 +17,7 @@ import javax.swing.JFormattedTextField;
 
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
@@ -27,11 +28,9 @@ public class AlterarLivroObjeto extends JFrame {
 	private JTextField tfTitulo;
 	private JTextField tfAutor;
 	private JTextField tfISBN;
-	private JTextField tfCategoria;
 	private JTextField tfEditora;
 	private JTextField tfResumo;
 	private JTextField tfPreco;
-	private JTextField tfFormato;
 	private JTextField tfPaginas;
 	private JTextField tfData;
 	private JTextField tfIndice;
@@ -40,7 +39,7 @@ public class AlterarLivroObjeto extends JFrame {
 	String data;
 	
 	public AlterarLivroObjeto(String titulo, String autor, String ISBN, String categoria, String editora,
-			String resumo, double preco, String formato, int paginas, Date date, String indice) {
+			String resumo, double preco, String formato, int paginas, String result, String indice) {
 		setTitle("Adicionar Livro");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 570, 500);
@@ -97,6 +96,16 @@ public class AlterarLivroObjeto extends JFrame {
 		lblIndice.setBounds(10, 349, 46, 14);
 		contentPane.add(lblIndice);
 		
+		JComboBox cbFormato = new JComboBox();
+		cbFormato.setModel(new DefaultComboBoxModel(new String[] {"Brochura", "Capa dura"}));
+		cbFormato.setBounds(84, 271, 225, 20);
+		contentPane.add(cbFormato);
+		
+		JComboBox cbCategoria = new JComboBox();
+		cbCategoria.setModel(new DefaultComboBoxModel(EnumCategoria.values()));
+		cbCategoria.setBounds(84, 95, 225, 20);
+		contentPane.add(cbCategoria);
+		
 		tfTitulo = new JTextField();
 		tfTitulo.setBounds(84, 20, 450, 20);
 		contentPane.add(tfTitulo);
@@ -141,17 +150,10 @@ public class AlterarLivroObjeto extends JFrame {
 		tfPaginas.setColumns(10);
 		tfPaginas.setText(String.valueOf(paginas));
 		
-		try {
-		MaskFormatter data = new MaskFormatter("##/##/####");
-		tfData = new JFormattedTextField(data);
+		tfData = new JTextField(String.valueOf(result));
 		tfData.setBounds(84, 321, 86, 20);
 		contentPane.add(tfData);
 		tfData.setColumns(10);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		tfData.setText(data);
 		
 		tfIndice = new JTextField();
 		tfIndice.setBounds(84, 346, 450, 70);
@@ -165,22 +167,14 @@ public class AlterarLivroObjeto extends JFrame {
 			public void actionPerformed(ActionEvent arg0){
 				ControleLivro cl = new ControleLivro();
 
-				cl.alterar( tfTitulo.getText(), tfAutor.getText(), tfISBN.getText(), tfCategoria.getText(),
-						tfEditora.getText(), tfResumo.getText(), tfPreco.getText(), tfFormato.getText(), 
+				cl.alterar( tfTitulo.getText(), tfAutor.getText(), tfISBN.getText(), cbCategoria.getSelectedItem().toString(),
+						tfEditora.getText(), tfResumo.getText(), tfPreco.getText(), cbFormato.getSelectedItem().toString(), 
 						tfPaginas.getText(), tfData.getText(), tfIndice.getText() );
 			}
 		});
 		btnAlterar.setBounds(10, 427, 89, 23);
 		contentPane.add(btnAlterar);
 		
-		JComboBox cbFormato = new JComboBox();
-		cbFormato.setModel(new DefaultComboBoxModel(new String[] {"Brochura", "Capa dura"}));
-		cbFormato.setBounds(84, 271, 225, 20);
-		contentPane.add(cbFormato);
-		
-		JComboBox cbCategoria = new JComboBox();
-		cbCategoria.setModel(new DefaultComboBoxModel(EnumCategoria.values()));
-		cbCategoria.setBounds(84, 95, 225, 20);
-		contentPane.add(cbCategoria);
+
 	}
 }
