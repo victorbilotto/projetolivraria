@@ -5,8 +5,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
 import Controller.ControleLivro;
+import Controller.JtextFieldSomenteLetras;
+import Controller.JtextFieldSomenteNumeros;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -15,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.DefaultComboBoxModel;
 import model.EnumCategoria;
 
@@ -111,51 +115,55 @@ public class AdicionarLivro extends JFrame {
 		
 		JLabel lblIndice = new JLabel("Indice:");
 		lblIndice.setBounds(10, 349, 46, 14);
-		contentPane.add(lblIndice);
+		contentPane.add(lblIndice);		
 		
-		
-		
-		tfTitulo = new JTextField();
+		tfTitulo = new JtextFieldSomenteLetras();
 		tfTitulo.setBounds(84, 20, 450, 20);
 		contentPane.add(tfTitulo);
 		tfTitulo.setColumns(10);
 		
-		tfAutor = new JTextField();
+		tfAutor = new  JtextFieldSomenteLetras();
 		tfAutor.setBounds(84, 45, 450, 20);
 		contentPane.add(tfAutor);
 		tfAutor.setColumns(10);
 		
-		tfISBN = new JTextField();
+		tfISBN = new  JtextFieldSomenteNumeros();
 		tfISBN.setBounds(84, 70, 225, 20);
 		contentPane.add(tfISBN);
 		tfISBN.setColumns(10);
 		
-		tfEditora = new JTextField();
+		tfEditora = new  JtextFieldSomenteLetras();
 		tfEditora.setBounds(84, 120, 450, 20);
 		contentPane.add(tfEditora);
 		tfEditora.setColumns(10);
 		
-		tfResumo = new JTextField();
+		tfResumo = new  JtextFieldSomenteLetras();
 		tfResumo.setBounds(84, 145, 450, 90);
 		contentPane.add(tfResumo);
 		tfResumo.setColumns(10);
 		
-		tfPreco = new JTextField();
+		tfPreco = new JtextFieldSomenteNumeros();
 		tfPreco.setBounds(84, 246, 86, 20);
 		contentPane.add(tfPreco);
 		tfPreco.setColumns(10);
 		
-		tfPaginas = new JTextField();
+		tfPaginas = new JtextFieldSomenteNumeros();
 		tfPaginas.setBounds(84, 296, 86, 20);
 		contentPane.add(tfPaginas);
 		tfPaginas.setColumns(10);
 		
-		tfData = new JTextField();
+		try {
+		MaskFormatter data = new MaskFormatter("##/##/####");
+		tfData = new JFormattedTextField(data);
 		tfData.setBounds(84, 321, 86, 20);
 		contentPane.add(tfData);
 		tfData.setColumns(10);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		tfIndice = new JTextField();
+		tfIndice = new JtextFieldSomenteLetras();
 		tfIndice.setBounds(84, 346, 450, 70);
 		contentPane.add(tfIndice);
 		tfIndice.setColumns(10);
@@ -194,6 +202,7 @@ public class AdicionarLivro extends JFrame {
 		});
 		btnLimpar.setBounds(455, 427, 89, 23);
 		contentPane.add(btnLimpar);
+		
 		
 				
 	}
