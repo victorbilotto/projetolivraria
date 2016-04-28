@@ -5,12 +5,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
 import Controller.ControleLivro;
+import Controller.JtextFieldSomenteLetras;
+import Controller.JtextFieldSomenteNumeros;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -110,81 +115,56 @@ public class AlterarLivroObjeto extends JFrame {
 		lblIndice.setBounds(10, 349, 46, 14);
 		contentPane.add(lblIndice);
 		
-		tfTitulo = new JTextField();
+		tfTitulo = new JtextFieldSomenteLetras();
 		tfTitulo.setBounds(84, 20, 450, 20);
 		contentPane.add(tfTitulo);
 		tfTitulo.setColumns(10);
-		tfTitulo.setText(titulo);
 		
-		tfAutor = new JTextField();
+		tfAutor = new  JtextFieldSomenteLetras();
 		tfAutor.setBounds(84, 45, 450, 20);
 		contentPane.add(tfAutor);
 		tfAutor.setColumns(10);
-		tfAutor.setText(autor);
 		
-		tfISBN = new JTextField();
-		tfISBN.setEditable(false);
+		tfISBN = new  JtextFieldSomenteNumeros();
 		tfISBN.setBounds(84, 70, 225, 20);
 		contentPane.add(tfISBN);
 		tfISBN.setColumns(10);
-		tfISBN.setText(ISBN);
 		
-		tfCategoria = new JTextField();
-		tfCategoria.setBounds(84, 95, 225, 20);
-		contentPane.add(tfCategoria);
-		tfCategoria.setColumns(10);
-		tfCategoria.setText(categoria);
-		
-		tfEditora = new JTextField();
+		tfEditora = new  JtextFieldSomenteLetras();
 		tfEditora.setBounds(84, 120, 450, 20);
 		contentPane.add(tfEditora);
 		tfEditora.setColumns(10);
-		tfEditora.setText(editora);
 		
-		tfResumo = new JTextField();
+		tfResumo = new  JtextFieldSomenteLetras();
 		tfResumo.setBounds(84, 145, 450, 90);
 		contentPane.add(tfResumo);
 		tfResumo.setColumns(10);
-		tfResumo.setText(resumo);
 		
-		tfPreco = new JTextField();
+		tfPreco = new JtextFieldSomenteNumeros();
 		tfPreco.setBounds(84, 246, 86, 20);
 		contentPane.add(tfPreco);
 		tfPreco.setColumns(10);
-		tfPreco.setText(String.valueOf(preco));
 		
-		tfFormato = new JTextField();
-		tfFormato.setBounds(84, 271, 225, 20);
-		contentPane.add(tfFormato);
-		tfFormato.setColumns(10);
-		tfFormato.setText(formato);
-		
-		tfPaginas = new JTextField();
+		tfPaginas = new JtextFieldSomenteNumeros();
 		tfPaginas.setBounds(84, 296, 86, 20);
 		contentPane.add(tfPaginas);
 		tfPaginas.setColumns(10);
-		tfPaginas.setText(String.valueOf(paginas));
 		
-		tfData = new JTextField();
+		try {
+		MaskFormatter data = new MaskFormatter("##/##/####");
+		tfData = new JFormattedTextField(data);
 		tfData.setBounds(84, 321, 86, 20);
 		contentPane.add(tfData);
 		tfData.setColumns(10);
-
-		SimpleDateFormat in= new SimpleDateFormat("yyyy-MM-dd");
-		SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy");
-		try {
-			data = out.format(in.parse(date.toString()));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}  
-		tfData.setText(data);
+		}
 		
-		tfIndice = new JTextField();
+		tfIndice = new JtextFieldSomenteLetras();
 		tfIndice.setBounds(84, 346, 450, 70);
 		contentPane.add(tfIndice);
 		tfIndice.setColumns(10);
-		tfIndice.setText(indice);
 		
 		
 		JButton btnAlterar = new JButton("Alterar");
