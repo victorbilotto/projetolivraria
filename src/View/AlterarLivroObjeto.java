@@ -1,6 +1,5 @@
 package View;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -8,19 +7,19 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
 import Controller.ControleLivro;
-import Controller.JtextFieldSomenteLetras;
-import Controller.JtextFieldSomenteNumeros;
+import model.EnumCategoria;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 
 import java.awt.event.ActionListener;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class AlterarLivroObjeto extends JFrame {
 
@@ -37,24 +36,6 @@ public class AlterarLivroObjeto extends JFrame {
 	private JTextField tfData;
 	private JTextField tfIndice;
 
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AlterarLivroObjeto frame = new AlterarLivroObjeto(null, null, null,null, null, null,0.0, 
-																			null, 0,null, null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	
 	String data;
 	
@@ -67,6 +48,7 @@ public class AlterarLivroObjeto extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
 
 		
 		ControleLivro cl = new ControleLivro();
@@ -115,40 +97,49 @@ public class AlterarLivroObjeto extends JFrame {
 		lblIndice.setBounds(10, 349, 46, 14);
 		contentPane.add(lblIndice);
 		
-		tfTitulo = new JtextFieldSomenteLetras();
+		tfTitulo = new JTextField();
 		tfTitulo.setBounds(84, 20, 450, 20);
 		contentPane.add(tfTitulo);
 		tfTitulo.setColumns(10);
+		tfTitulo.setText(titulo);
 		
-		tfAutor = new  JtextFieldSomenteLetras();
+		tfAutor = new JTextField();
 		tfAutor.setBounds(84, 45, 450, 20);
 		contentPane.add(tfAutor);
 		tfAutor.setColumns(10);
+		tfAutor.setText(autor);
 		
-		tfISBN = new  JtextFieldSomenteNumeros();
+		tfISBN = new JTextField();
+		tfISBN.setEditable(false);
 		tfISBN.setBounds(84, 70, 225, 20);
 		contentPane.add(tfISBN);
 		tfISBN.setColumns(10);
+		tfISBN.setText(ISBN);
+
 		
-		tfEditora = new  JtextFieldSomenteLetras();
+		tfEditora = new JTextField();
 		tfEditora.setBounds(84, 120, 450, 20);
 		contentPane.add(tfEditora);
 		tfEditora.setColumns(10);
+		tfEditora.setText(editora);
 		
-		tfResumo = new  JtextFieldSomenteLetras();
+		tfResumo = new JTextField();
 		tfResumo.setBounds(84, 145, 450, 90);
 		contentPane.add(tfResumo);
 		tfResumo.setColumns(10);
+		tfResumo.setText(resumo);
 		
-		tfPreco = new JtextFieldSomenteNumeros();
+		tfPreco = new JTextField();
 		tfPreco.setBounds(84, 246, 86, 20);
 		contentPane.add(tfPreco);
 		tfPreco.setColumns(10);
+		tfPreco.setText(String.valueOf(preco));
 		
-		tfPaginas = new JtextFieldSomenteNumeros();
+		tfPaginas = new JTextField();
 		tfPaginas.setBounds(84, 296, 86, 20);
 		contentPane.add(tfPaginas);
 		tfPaginas.setColumns(10);
+		tfPaginas.setText(String.valueOf(paginas));
 		
 		try {
 		MaskFormatter data = new MaskFormatter("##/##/####");
@@ -160,12 +151,14 @@ public class AlterarLivroObjeto extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		tfData.setText(data);
 		
-		tfIndice = new JtextFieldSomenteLetras();
+		tfIndice = new JTextField();
 		tfIndice.setBounds(84, 346, 450, 70);
 		contentPane.add(tfIndice);
 		tfIndice.setColumns(10);
-		
+		tfIndice.setText(indice);
+
 		
 		JButton btnAlterar = new JButton("Alterar");
 		btnAlterar.addActionListener(new ActionListener() {
@@ -179,6 +172,15 @@ public class AlterarLivroObjeto extends JFrame {
 		});
 		btnAlterar.setBounds(10, 427, 89, 23);
 		contentPane.add(btnAlterar);
+		
+		JComboBox cbFormato = new JComboBox();
+		cbFormato.setModel(new DefaultComboBoxModel(new String[] {"Brochura", "Capa dura"}));
+		cbFormato.setBounds(84, 271, 225, 20);
+		contentPane.add(cbFormato);
+		
+		JComboBox cbCategoria = new JComboBox();
+		cbCategoria.setModel(new DefaultComboBoxModel(EnumCategoria.values()));
+		cbCategoria.setBounds(84, 95, 225, 20);
+		contentPane.add(cbCategoria);
 	}
-	
 }
