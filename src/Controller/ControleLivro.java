@@ -87,6 +87,7 @@ public class ControleLivro extends JFrame{
 	
 	public void populaTabela(String titulo, JTable tabela)
 	{
+		
 		tabela.setModel(new DefaultTableModel(
 
 				new Object[][] {
@@ -97,7 +98,9 @@ public class ControleLivro extends JFrame{
 				));
 		DAOLivro dao = new DAOLivroImpl();
 		List<Livro> listaLivro = dao.pesquisarTitulo(titulo);
-
+		if(listaLivro.size()<=0){
+			JOptionPane.showMessageDialog(null, "Nenhum livro encontrado");
+		}
 		DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
 		if(modelo.getRowCount() > 0 ){
 			modelo.setRowCount(0);

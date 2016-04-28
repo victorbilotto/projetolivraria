@@ -67,7 +67,7 @@ public class AlterarLivroPesquisa extends JFrame {
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				ControleLivro cl = new ControleLivro();				
+				ControleLivro cl = new ControleLivro();
 				cl.populaTabela(tfTitulo.getText(), tabelaLivros);
 				
 			}
