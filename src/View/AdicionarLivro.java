@@ -12,6 +12,7 @@ import Controller.JtextFieldSomenteLetras;
 import Controller.JtextFieldSomenteNumeros;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -177,9 +178,11 @@ public class AdicionarLivro extends JFrame {
 					cl.adicionarLivro( tfTitulo.getText(), tfAutor.getText(), tfISBN.getText(), cbCategoria.getSelectedItem().toString(),
 							tfEditora.getText(), tfResumo.getText(), tfPreco.getText(), cbFormato.getSelectedItem().toString(), 
 							tfPaginas.getText(), tfData.getText(), tfIndice.getText() );
+					JOptionPane.showMessageDialog(null, "Livro adiconado com sucesso");
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Falha ao adicionar livro");
 				}
 			}
 		});

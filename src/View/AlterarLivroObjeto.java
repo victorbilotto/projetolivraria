@@ -10,6 +10,7 @@ import Controller.ControleLivro;
 import model.EnumCategoria;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -167,9 +168,16 @@ public class AlterarLivroObjeto extends JFrame {
 			public void actionPerformed(ActionEvent arg0){
 				ControleLivro cl = new ControleLivro();
 
-				cl.alterar( tfTitulo.getText(), tfAutor.getText(), tfISBN.getText(), cbCategoria.getSelectedItem().toString(),
-						tfEditora.getText(), tfResumo.getText(), tfPreco.getText(), cbFormato.getSelectedItem().toString(), 
-						tfPaginas.getText(), tfData.getText(), tfIndice.getText() );
+				
+				
+				try{
+					cl.alterar( tfTitulo.getText(), tfAutor.getText(), tfISBN.getText(), cbCategoria.getSelectedItem().toString(),
+							tfEditora.getText(), tfResumo.getText(), tfPreco.getText(), cbFormato.getSelectedItem().toString(), 
+							tfPaginas.getText(), tfData.getText(), tfIndice.getText() );
+					JOptionPane.showMessageDialog(null,  "Livro alterado com sucesso");
+				}catch(Exception e){
+					JOptionPane.showMessageDialog(null,  "Falha ao alterar livro");
+				}
 			}
 		});
 		btnAlterar.setBounds(10, 427, 89, 23);
