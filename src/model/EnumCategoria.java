@@ -2,7 +2,7 @@ package model;
 
 public enum EnumCategoria {
 	
-	Fansatia,
+	Fantasia,
 	Ficção,
 	Autoajuda,
 	Educação,

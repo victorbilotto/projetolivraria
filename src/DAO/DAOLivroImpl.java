@@ -15,9 +15,11 @@ public class DAOLivroImpl implements DAOLivro{
 	
 	
 	final String pesqPorNome = "SELECT * FROM livro where titulo like ?";
-	final String pesqPorCategoria = "SELECT * FROM livro where categoria like ?";
-	final String pesqPorAutor = "SELECT * FROM livro where autor like ?";
-	final String pesqPorEditora = "SELECT * FROM livro where editora like ?";
+	final String pesqPorTitulo = "titulo like ?";
+	final String pesqPorCategoria = "categoria like ?";
+	final String pesqPorAutor = "autor like ?";
+	final String pesqPorEditora = "editora like ?";
+	final String pesqStmt = "SELECT * FROM livro where ";
 	final String insert ="INSERT INTO livro" +
 			"(titulo, autor, ISBN, categoria, editora, resumo, preco, formatoLivro, numPaginas, dataPublicacao, indice) " +
 			"values (?,?,?,?,?,?,?,?,?,?,?)";
@@ -72,7 +74,7 @@ public class DAOLivroImpl implements DAOLivro{
 		Connection con = DataBaseConnection.getConnection();
 		
 		try {
-			PreparedStatement stm = con.prepareStatement( pesqPorAutor );
+			PreparedStatement stm = con.prepareStatement( pesqStmt + pesqPorAutor );
 			stm.setString(1, "%" + autor +"%");
 			ResultSet rs = stm.executeQuery();
 			while( rs.next() ){
@@ -104,7 +106,7 @@ public class DAOLivroImpl implements DAOLivro{
 		Connection con = DataBaseConnection.getConnection();
 		
 		try {
-			PreparedStatement stm = con.prepareStatement( pesqPorEditora );
+			PreparedStatement stm = con.prepareStatement( pesqStmt + pesqPorEditora );
 			stm.setString(1, "%" + editora +"%");
 			ResultSet rs = stm.executeQuery();
 			while( rs.next() ){
@@ -136,7 +138,7 @@ public class DAOLivroImpl implements DAOLivro{
 		Connection con = DataBaseConnection.getConnection();
 		
 		try {
-			PreparedStatement stm = con.prepareStatement( pesqPorCategoria );
+			PreparedStatement stm = con.prepareStatement( pesqStmt + pesqPorCategoria );
 			stm.setString(1, "%" + categoria +"%");
 			ResultSet rs = stm.executeQuery();
 			while( rs.next() ){
@@ -260,6 +262,79 @@ public class DAOLivroImpl implements DAOLivro{
 			e.printStackTrace();
 		}
 		return l;
+	}
+
+	@Override
+	public List<Livro> pesquisarLivro(String[] valores) {
+		
+		List<Livro> lista = new ArrayList<Livro>();
+		Connection con = DataBaseConnection.getConnection();
+		
+		try {
+			String stmtPesq = pesqStmt;
+			boolean[] contar = new boolean[4];
+			int qtdStmt = 0;
+			
+			for(int i = 0; i < valores.length; i++){
+				if(valores[i] != null && !valores[i].isEmpty()) {
+					contar[i] = true;
+					qtdStmt++;
+					if(i > 0){
+						if(contar[i-1])
+							stmtPesq += ", ";
+					}
+					switch(i){
+						case 0:
+							stmtPesq += pesqPorTitulo;
+							break;
+						case 1:
+							stmtPesq += pesqPorAutor;
+							break;
+						case 2:
+							stmtPesq += pesqPorEditora;
+							break;
+						case 3: 
+							stmtPesq += pesqPorCategoria;
+							break;
+					}
+				} else {
+					contar[i] = false;
+				}
+			}
+			
+			
+			PreparedStatement stm = con.prepareStatement( stmtPesq );
+			for(int i = 0; i < qtdStmt; i++) {
+				for(int j = 0; j < valores.length; j++) {
+					if(contar[j]){
+						stm.setString(i+1, "%" + valores[j] + "%");
+						contar[j] = false;
+						break;
+					}
+				}
+			}
+			
+			ResultSet rs = stm.executeQuery();
+			while( rs.next() ){
+				Livro l = new Livro();
+				l.setTitulo(rs.getString("titulo"));
+				l.setAutor(rs.getString("autor"));
+				l.setISBN(rs.getString("ISBN"));
+				l.setCategoria(rs.getString("categoria"));
+				l.setEditora(rs.getString("editora"));
+				l.setResumo(rs.getString("resumo"));
+				l.setPreco((Double.parseDouble( rs.getString( "preco" ))));
+				l.setFormatoLivro(rs.getString("formatoLivro"));
+				l.setNumPaginas(Integer.parseInt(rs.getString("numPaginas")));
+				l.setDataPublicacao(rs.getDate("dataPublicacao"));
+				l.setIndice(rs.getString("indice"));
+				lista.add( l );
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			
+		return lista;
 	}
 
 }

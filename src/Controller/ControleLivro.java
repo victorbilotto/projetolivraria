@@ -46,13 +46,45 @@ public class ControleLivro extends JFrame{
 		DAOLivro dao = new DAOLivroImpl();
 		dao.adicionarLivro(l);
 	}
-	public List<Livro> pesquisarLivros(String nome){
+	@SuppressWarnings("serial")
+	public void pesquisarLivros(String[] valores, JTable tabela){
 		
 		DAOLivro dao = new DAOLivroImpl();
-		lista = dao.pesquisarTitulo(nome);
+		List<Livro> listaLivro = dao.pesquisarLivro(valores);
 		
-		return lista;
+		tabela.setModel(new DefaultTableModel(
+				new Object[][] {},
+				new String[] {
+					"Titulo", "Autor", "Editora", "Categoria", "Valor (R$)", ""
+				}
+			) {
+				boolean[] columnEditables = new boolean[] {
+					false, false, false, false, false, false
+				};
+				public boolean isCellEditable(int row, int column) {
+					return columnEditables[column];
+				}
+		});
 		
+		if(listaLivro.size()<=0){
+			JOptionPane.showMessageDialog(null, "Nenhum livro encontrado");
+		}
+		
+		DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+		if(modelo.getRowCount() > 0 ){
+			modelo.setRowCount(0);
+		}
+		
+		for(Livro l: listaLivro){
+			Object[] objeto = new Object[6];
+			objeto[0] = l.getTitulo();
+			objeto[1] = l.getAutor();
+			objeto[2] = l.getEditora();
+			objeto[3] = l.getCategoria();
+			objeto[4] = l.getPreco();
+			objeto[5] = "Comprar";
+			modelo.addRow(objeto);
+		}
 	}
 	
 	public void excluirLivro(String isbn){
