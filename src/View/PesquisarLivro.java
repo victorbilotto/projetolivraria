@@ -21,6 +21,13 @@ import model.EnumCategoria;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PesquisarLivro extends JFrame {
 
@@ -55,7 +62,7 @@ public class PesquisarLivro extends JFrame {
 		setTitle("Pesquisar Livro");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 720, 400);
+		setBounds(100, 100, 709, 439);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -137,7 +144,11 @@ public class PesquisarLivro extends JFrame {
 		
 		cbCategoria = new JComboBox();
 		cbCategoria.setToolTipText("Escolha a categoria do livro a ser pesquisado.");
-		cbCategoria.setModel(new DefaultComboBoxModel(EnumCategoria.values()));
+		cbCategoria.setModel(new DefaultComboBoxModel(new String[] {""}));
+		EnumCategoria[] enumc = EnumCategoria.values();
+		for(EnumCategoria e: enumc){
+			cbCategoria.addItem(e);
+		}
 		cbCategoria.setBounds(526, 42, 168, 20);
 		contentPane.add(cbCategoria);
 		
@@ -153,11 +164,11 @@ public class PesquisarLivro extends JFrame {
 		tabelaLivros.setModel(new DefaultTableModel(
 			new Object[][] {},
 			new String[] {
-				"Titulo", "Autor", "Editora", "Categoria", "Valor (R$)", ""
+				"Titulo", "Autor", "Editora", "Categoria", "Valor (R$)"
 			}
 		) {
 			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false
+				false, false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
@@ -173,9 +184,30 @@ public class PesquisarLivro extends JFrame {
 		tabelaLivros.getColumnModel().getColumn(3).setPreferredWidth(100);
 		tabelaLivros.getColumnModel().getColumn(4).setResizable(false);
 		tabelaLivros.getColumnModel().getColumn(4).setPreferredWidth(64);
-		tabelaLivros.getColumnModel().getColumn(5).setResizable(false);
-		tabelaLivros.getColumnModel().getColumn(5).setPreferredWidth(62);
 		scrollPane.setViewportView(tabelaLivros);
+		
+		
+		
+		JButton btnAdicionarAoCarrinho = new JButton("Adicionar ao carrinho");
+		btnAdicionarAoCarrinho.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnAdicionarAoCarrinho.setEnabled(false);
+			}
+		});
+		btnAdicionarAoCarrinho.setEnabled(false);
+		btnAdicionarAoCarrinho.setBounds(265, 372, 158, 23);
+		contentPane.add(btnAdicionarAoCarrinho);
+		
+		tabelaLivros.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				btnAdicionarAoCarrinho.setEnabled(true);
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				btnAdicionarAoCarrinho.setEnabled(false);
+			}
+		});
 		
 		
 		
