@@ -1,4 +1,4 @@
-package View;
+	package View;
 
 import java.awt.EventQueue;
 
@@ -55,10 +55,6 @@ public class AlterarLivroPesquisa extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
 	public AlterarLivroPesquisa() {
 		setTitle("Pesquisar Livro");
 		setResizable(false);
