@@ -55,7 +55,7 @@ public class ControleLivro extends JFrame{
 		tabela.setModel(new DefaultTableModel(
 				new Object[][] {},
 				new String[] {
-						"Titulo", "Autor", "Editora", "Categoria", "Valor R$"
+						"ISBN", "Titulo", "Autor", "Editora", "Categoria"	
 				}
 			) {
 				boolean[] columnEditables = new boolean[] {
@@ -87,11 +87,12 @@ public class ControleLivro extends JFrame{
 		
 		for(Livro l: listaLivro){
 			Object[] objeto = new Object[5];
-			objeto[0] = l.getTitulo();
-			objeto[1] = l.getAutor();
-			objeto[2] = l.getEditora();
-			objeto[3] = l.getCategoria();
-			objeto[4] = l.getPreco();
+			objeto[0] = l.getISBN();
+			objeto[1] = l.getTitulo();
+			objeto[2] = l.getAutor();
+			objeto[3] = l.getEditora();
+			objeto[4] = l.getCategoria();
+			
 			modelo.addRow(objeto);
 		}
 	}

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import DAO.DAOCarrinho;
 import DAO.DAOCarrinhoImpl;
 import model.Carrinho;
 import model.Item;
@@ -18,7 +19,7 @@ public class ControleCarrinho {
 	}
 	
 	public void adicionarItem(String titulo, int quantidade) {
-		DAOCarrinhoImpl dao = new DAOCarrinhoImpl();
+		DAOCarrinho dao = new DAOCarrinhoImpl();
 		List<Item> itens = new ArrayList<Item>();
 		Carrinho carrinho = new Carrinho();
 		Item item = dao.retornaItem(titulo);
