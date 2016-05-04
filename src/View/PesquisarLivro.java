@@ -17,25 +17,26 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 
+import Controller.ControleCarrinho;
 import Controller.ControleLivro;
 import model.EnumCategoria;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import javax.swing.ScrollPaneConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
+@SuppressWarnings("serial")
 public class PesquisarLivro extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField tfTitulo;
 	private JTextField tfAutor;
 	private JTextField tfEditora;
+	@SuppressWarnings("rawtypes")
 	private JComboBox cbCategoria;
 	private JTable tabelaLivros;
 	private JScrollPane scrollPane;
@@ -52,10 +53,11 @@ public class PesquisarLivro extends JFrame {
 			}
 		});
 	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public PesquisarLivro() {
 		setTitle("Pesquisar Livro");
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 709, 439);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -155,7 +157,7 @@ public class PesquisarLivro extends JFrame {
 		contentPane.add(cbCategoria);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setEnabled(false);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setViewportBorder(new LineBorder(new Color(0, 0, 0)));
 		scrollPane.setBackground(Color.WHITE);
 		scrollPane.setBounds(10, 152, 684, 209);
@@ -192,21 +194,64 @@ public class PesquisarLivro extends JFrame {
 		btnAdicionarAoCarrinho.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnAdicionarAoCarrinho.setEnabled(false);
+				ControleCarrinho cc = new ControleCarrinho();
+				String tituloLivro = "";
+				for(int i = 0; i < tabelaLivros.getColumnCount(); i++){
+					if (tabelaLivros.getColumnName(i) == "Titulo"){
+						tituloLivro = tabelaLivros.getValueAt(tabelaLivros.getSelectedRow(), i).toString();
+						break;
+					}
+				}
+				if(!cc.verificaItem(tituloLivro)){
+					try {
+						AdicionarAoCarrinho addCarrinho = new AdicionarAoCarrinho(tituloLivro);
+						addCarrinho.setVisible(true);
+					} catch (Exception exp) {
+						exp.printStackTrace();
+					}
+
+				}
 			}
 		});
 		btnAdicionarAoCarrinho.setEnabled(false);
-		btnAdicionarAoCarrinho.setBounds(265, 372, 158, 23);
+		btnAdicionarAoCarrinho.setBounds(290, 372, 158, 23);
 		contentPane.add(btnAdicionarAoCarrinho);
 		
-		tabelaLivros.addFocusListener(new FocusAdapter() {
+		tabelaLivros.addMouseListener(new MouseAdapter() {
 			@Override
-			public void focusGained(FocusEvent arg0) {
-				btnAdicionarAoCarrinho.setEnabled(true);
+			public void mouseClicked(MouseEvent arg0) {
+				if(tabelaLivros.getRowCount() > 0 && tabelaLivros.getSelectedRowCount() == 1) {
+					btnAdicionarAoCarrinho.setEnabled(true);
+				} else {
+					btnAdicionarAoCarrinho.setEnabled(false);
+				}
 			}
 			@Override
-			public void focusLost(FocusEvent e) {
-				btnAdicionarAoCarrinho.setEnabled(false);
+			public void mouseReleased(MouseEvent e) {
+				if(tabelaLivros.getRowCount() > 0 && tabelaLivros.getSelectedRowCount() == 1) {
+					btnAdicionarAoCarrinho.setEnabled(true);
+				} else {
+					btnAdicionarAoCarrinho.setEnabled(false);
+				}
 			}
-		});	
+		});
+		tabelaLivros.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if(tabelaLivros.getRowCount() > 0 && tabelaLivros.getSelectedRowCount() == 1) {
+					btnAdicionarAoCarrinho.setEnabled(true);
+				} else {
+					btnAdicionarAoCarrinho.setEnabled(false);
+				}
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(tabelaLivros.getRowCount() > 0 && tabelaLivros.getSelectedRowCount() == 1) {
+					btnAdicionarAoCarrinho.setEnabled(true);
+				} else {
+					btnAdicionarAoCarrinho.setEnabled(false);
+				}
+			}
+		});
 	}
 }
