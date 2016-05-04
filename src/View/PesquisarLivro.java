@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.DefaultComboBoxModel;
@@ -96,8 +97,16 @@ public class PesquisarLivro extends JFrame {
 				valores[1] = tfAutor.getText();
 				valores[2] = tfEditora.getText();
 				valores[3] = cbCategoria.getSelectedItem().toString();
-				ControleLivro cl = new ControleLivro();
-				cl.pesquisarLivros(valores, tabelaLivros);
+				boolean vazio = true;
+				for(int i = 0; i < valores.length; i++)
+					if(valores[i] != null && !valores[i].isEmpty())
+						vazio = false;
+				if(!vazio) {
+					ControleLivro cl = new ControleLivro();
+					cl.pesquisarLivros(valores, tabelaLivros);
+				} else {
+					JOptionPane.showMessageDialog(null, "Preencha pelo menos um campo.");
+				}
 			}
 		});
 		btnPesquisar.setBounds(10, 97, 100, 23);
