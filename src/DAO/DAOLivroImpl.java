@@ -280,7 +280,12 @@ public class DAOLivroImpl implements DAOLivro{
 					contar[i] = true;
 					qtdStmt++;
 					if(i > 0){
-						stmtPesq += " AND ";
+						for(int j = i-1; j >= 0; j--){
+							if(contar[j]){
+								stmtPesq += " AND ";
+								break;
+							}
+						}
 					}
 					switch(i){
 						case 0:
