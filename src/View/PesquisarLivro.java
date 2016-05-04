@@ -39,10 +39,7 @@ public class PesquisarLivro extends JFrame {
 	private JComboBox cbCategoria;
 	private JTable tabelaLivros;
 	private JScrollPane scrollPane;
-
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -55,10 +52,6 @@ public class PesquisarLivro extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
 	public PesquisarLivro() {
 		setTitle("Pesquisar Livro");
 		setResizable(false);
@@ -195,8 +188,6 @@ public class PesquisarLivro extends JFrame {
 		tabelaLivros.getColumnModel().getColumn(4).setPreferredWidth(64);
 		scrollPane.setViewportView(tabelaLivros);
 		
-		
-		
 		JButton btnAdicionarAoCarrinho = new JButton("Adicionar ao carrinho");
 		btnAdicionarAoCarrinho.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -216,9 +207,6 @@ public class PesquisarLivro extends JFrame {
 			public void focusLost(FocusEvent e) {
 				btnAdicionarAoCarrinho.setEnabled(false);
 			}
-		});
-		
-		
-		
+		});	
 	}
 }

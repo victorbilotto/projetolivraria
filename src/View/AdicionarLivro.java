@@ -172,17 +172,35 @@ public class AdicionarLivro extends JFrame {
 		JButton btnAdicionar = new JButton("Adicionar");
 		btnAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ControleLivro cl = new ControleLivro();
-
-				try {
-					cl.adicionarLivro( tfTitulo.getText(), tfAutor.getText(), tfISBN.getText(), cbCategoria.getSelectedItem().toString(),
-							tfEditora.getText(), tfResumo.getText(), tfPreco.getText(), cbFormato.getSelectedItem().toString(), 
-							tfPaginas.getText(), tfData.getText(), tfIndice.getText() );
-					JOptionPane.showMessageDialog(null, "Livro adiconado com sucesso");
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					JOptionPane.showMessageDialog(null, "Falha ao adicionar livro");
+				String[] valores = new String[8];
+				valores[0] = tfTitulo.getText();
+				valores[1] = tfAutor.getText();
+				valores[2] = tfISBN.getText();
+				valores[3] = tfEditora.getText();
+				valores[4] = tfResumo.getText();
+				valores[5] = tfPreco.getText();
+				valores[6] = tfPaginas.getText();
+				valores[7] = tfIndice.getText();		
+				
+				boolean vazio = true;
+				for(int i = 0; i < valores.length; i++){
+					if(valores[i] != null && !valores[i].isEmpty()){
+						vazio = false;
+					}
+				}	
+				if(!vazio) {
+					ControleLivro cl = new ControleLivro();
+					try {
+						cl.adicionarLivro( tfTitulo.getText(), tfAutor.getText(), tfISBN.getText(), cbCategoria.getSelectedItem().toString(),
+								tfEditora.getText(), tfResumo.getText(), tfPreco.getText(), cbFormato.getSelectedItem().toString(), 
+								tfPaginas.getText(), tfData.getText(), tfIndice.getText() );
+						JOptionPane.showMessageDialog(null, "Livro adiconado com sucesso");
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					
+				}else {
+					JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
 				}
 			}
 		});
@@ -205,8 +223,5 @@ public class AdicionarLivro extends JFrame {
 		});
 		btnLimpar.setBounds(455, 427, 89, 23);
 		contentPane.add(btnLimpar);
-		
-		
-				
 	}
 }
