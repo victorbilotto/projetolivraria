@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
 import Controller.ControleLivro;
+import Controller.JTextFieldTudo;
 import Controller.JtextFieldSomenteLetras;
 import Controller.JtextFieldSomenteNumeros;
 
@@ -118,7 +119,7 @@ public class AdicionarLivro extends JFrame {
 		lblIndice.setBounds(10, 349, 46, 14);
 		contentPane.add(lblIndice);		
 		
-		tfTitulo = new JtextFieldSomenteLetras();
+		tfTitulo = new JTextFieldTudo();
 		tfTitulo.setBounds(84, 20, 450, 20);
 		contentPane.add(tfTitulo);
 		tfTitulo.setColumns(10);
