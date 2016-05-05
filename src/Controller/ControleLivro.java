@@ -147,15 +147,10 @@ public class ControleLivro extends JFrame{
 				}
 		});
 		tabelaLivros.getColumnModel().getColumn(0).setResizable(false);
-		tabelaLivros.getColumnModel().getColumn(0).setPreferredWidth(222);
 		tabelaLivros.getColumnModel().getColumn(1).setResizable(false);
-		tabelaLivros.getColumnModel().getColumn(1).setPreferredWidth(89);
 		tabelaLivros.getColumnModel().getColumn(2).setResizable(false);
-		tabelaLivros.getColumnModel().getColumn(2).setPreferredWidth(85);
 		tabelaLivros.getColumnModel().getColumn(3).setResizable(false);
-		tabelaLivros.getColumnModel().getColumn(3).setPreferredWidth(100);
 		tabelaLivros.getColumnModel().getColumn(4).setResizable(false);
-		tabelaLivros.getColumnModel().getColumn(4).setPreferredWidth(64);
 		
 		if(listaLivro.size()<=0){
 			JOptionPane.showMessageDialog(null, "Nenhum livro encontrado, faça uma nova busca");
@@ -202,8 +197,8 @@ public class ControleLivro extends JFrame{
 		
 		for(Livro l: listaLivro){
 			Object[] objeto = new Object[4];
-			objeto[1] = l.getTitulo();
-			objeto[0] = l.getISBN();
+			objeto[0] = l.getTitulo();
+			objeto[1] = l.getISBN();
 			objeto[2] = l.getAutor();
 			objeto[3] = l.getEditora();
 			modelo.addRow(objeto);

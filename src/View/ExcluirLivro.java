@@ -68,7 +68,6 @@ public class ExcluirLivro extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ControleLivro cl = new ControleLivro();	
 				cl.populaTabela(tfNome.getText(), tabelaLivros);
-				
 			}
 		});
 		btnPesquisar.setBounds(584, 10, 89, 23);
@@ -84,6 +83,7 @@ public class ExcluirLivro extends JFrame {
 				}
 				String isbn = tabelaLivros.getValueAt(selecionada, 1).toString();	
 				cl.excluirLivro( isbn );
+				cl.populaTabela(tfNome.getText(), tabelaLivros);
 				JOptionPane.showMessageDialog(null, "Livro excluido com sucesso");
 			}
 		});
