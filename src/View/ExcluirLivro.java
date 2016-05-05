@@ -1,7 +1,5 @@
 package View;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -9,19 +7,17 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controller.ControleLivro;
-import model.Livro;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 
+@SuppressWarnings("serial")
 public class ExcluirLivro extends JFrame {
 
 	private JPanel contentPane;
@@ -31,32 +27,17 @@ public class ExcluirLivro extends JFrame {
 	private JScrollPane sp_tbl_livro;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ExcluirLivro frame = new ExcluirLivro();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public ExcluirLivro() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		setTitle("Excluir Livro");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 695, 484);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		ControleLivro cl = new ControleLivro();
 		
 		tfNome = new JTextField();
 		tfNome.setBounds(65, 11, 478, 20);
@@ -70,7 +51,7 @@ public class ExcluirLivro extends JFrame {
 				cl.populaTabela(tfNome.getText(), tabelaLivros);
 			}
 		});
-		btnPesquisar.setBounds(584, 10, 89, 23);
+		btnPesquisar.setBounds(570, 10, 103, 23);
 		contentPane.add(btnPesquisar);
 		
 		btnExcluir = new JButton("Excluir");

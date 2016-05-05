@@ -41,18 +41,6 @@ public class PesquisarLivro extends JFrame {
 	private JTable tabelaLivros;
 	private JScrollPane scrollPane;
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PesquisarLivro frame = new PesquisarLivro();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public PesquisarLivro() {
 		setTitle("Pesquisar Livro");

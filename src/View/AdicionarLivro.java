@@ -38,25 +38,10 @@ public class AdicionarLivro extends JFrame {
 	private JTextField tfIndice;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AdicionarLivro frame = new AdicionarLivro();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public AdicionarLivro() {
+		setResizable(false);
 		setTitle("Adicionar Livro");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 570, 500);

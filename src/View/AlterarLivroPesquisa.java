@@ -40,25 +40,10 @@ public class AlterarLivroPesquisa extends JFrame {
 	private JTable tabelaLivros;
 	private JScrollPane scrollPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AlterarLivroPesquisa frame = new AlterarLivroPesquisa();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	public AlterarLivroPesquisa() {
-		setTitle("Alterar Livro Pesquisaq");
+		setTitle("Alterar Livro - Pesquisar");
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 709, 439);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

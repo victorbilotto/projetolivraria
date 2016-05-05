@@ -1,6 +1,5 @@
 package View;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -8,53 +7,25 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.JTable;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 
 import Controller.ControleCarrinho;
-import Controller.ControleLivro;
-import DAO.DAOCarrinho;
-import DAO.DAOCarrinhoImpl;
-import model.Carrinho;
-import model.EnumCategoria;
-import model.Item;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ScrollPaneConstants;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 @SuppressWarnings("serial")
 public class VisualizarCarrinho extends JFrame {
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VisualizarCarrinho frame = new VisualizarCarrinho();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	private JPanel contentPane;
 	private JTable tabelaLivros;
 	private JScrollPane scrollPane;
 	
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public VisualizarCarrinho() {
 		
 		setTitle("Carrinho");
@@ -121,6 +92,11 @@ public class VisualizarCarrinho extends JFrame {
 		contentPane.add(btnConfirmar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnCancelar.setBounds(605, 376, 89, 23);
 		contentPane.add(btnCancelar);
 		
