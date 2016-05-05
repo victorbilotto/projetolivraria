@@ -168,9 +168,12 @@ public class AdicionarLivro extends JFrame {
 				valores[6] = tfPaginas.getText();
 				valores[7] = tfIndice.getText();		
 				
-				boolean vazio = true;
+				boolean vazio = true;	
 				for(int i = 0; i < valores.length; i++){
-					if(valores[i] != null && !valores[i].trim().isEmpty() && !valores[i].trim().equals("")){
+					if(valores[i] != null && !valores[i].trim().isEmpty() && !tfTitulo.getText().trim().equals("") && !tfAutor.getText().trim().equals("") &&
+							!tfISBN.getText().trim().equals("") && !tfEditora.getText().trim().equals("") && !tfResumo.getText().trim().equals("") &&
+							!tfPreco.getText().trim().equals("") && !tfPaginas.getText().trim().equals("") &&
+							!tfData.getText().trim().equals("") && !tfIndice.getText().trim().equals("")  ){
 						vazio = false; 
 					}
 				}	
