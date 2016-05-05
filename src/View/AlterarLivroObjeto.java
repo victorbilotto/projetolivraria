@@ -101,11 +101,13 @@ public class AlterarLivroObjeto extends JFrame {
 		cbFormato.setModel(new DefaultComboBoxModel(new String[] {"Brochura", "Capa dura"}));
 		cbFormato.setBounds(84, 271, 225, 20);
 		contentPane.add(cbFormato);
+		cbFormato.setSelectedItem(formato);
 		
 		JComboBox cbCategoria = new JComboBox();
 		cbCategoria.setModel(new DefaultComboBoxModel(EnumCategoria.values()));
 		cbCategoria.setBounds(84, 95, 225, 20);
 		contentPane.add(cbCategoria);
+		cbCategoria.setSelectedItem(categoria);
 		
 		tfTitulo = new JTextField();
 		tfTitulo.setBounds(84, 20, 450, 20);

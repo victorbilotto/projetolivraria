@@ -56,7 +56,7 @@ public class AlterarLivroPesquisa extends JFrame {
 		});
 	}
 	public AlterarLivroPesquisa() {
-		setTitle("Pesquisar Livro");
+		setTitle("Alterar Livro Pesquisaq");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 709, 439);
@@ -199,7 +199,6 @@ public class AlterarLivroPesquisa extends JFrame {
 				    return; 
 				}
 				String escolhido = tabelaLivros.getValueAt(selecionada, 0).toString();
-				System.out.println(escolhido);
 				try {
 					cl.alteraEscolhido(escolhido);
 				} catch (Exception e1) {
