@@ -1,7 +1,5 @@
 package View;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -198,6 +196,8 @@ public class PesquisarLivro extends JFrame {
 						exp.printStackTrace();
 					}
 
+				} else {
+					JOptionPane.showMessageDialog(null, "Item já foi adicionado!");
 				}
 			}
 		});

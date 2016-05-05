@@ -11,11 +11,13 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class AlterarProdutoCarrinho extends JFrame{
 	public AlterarProdutoCarrinho(String ISBN, String Titulo, String Preco, String Quantidade, JTable tabelaLivros, JLabel lblTotalCalculado) {
+		setResizable(false);
 		setTitle("Alterar Item");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 444, 253);
+		setBounds(100, 100, 444, 229);
 		getContentPane().setLayout(null);
 		
 		JLabel lblTitulo = new JLabel("Titulo:");
@@ -63,6 +65,11 @@ public class AlterarProdutoCarrinho extends JFrame{
 		getContentPane().add(btnAlterar);
 		
 		JButton btnFechar = new JButton("Fechar");
+		btnFechar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnFechar.setBounds(330, 164, 89, 23);
 		getContentPane().add(btnFechar);
 	}

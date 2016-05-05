@@ -148,8 +148,5 @@ public class VisualizarCarrinho extends JFrame {
 		lblTotal.setBounds(545, 332, 46, 14);
 		contentPane.add(lblTotal);
 		
-		
-		
-		
 	}
 }

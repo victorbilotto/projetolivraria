@@ -62,6 +62,7 @@ public class AdicionarAoCarrinho extends JFrame {
 				ControleCarrinho cc = new ControleCarrinho();
 				if(Integer.parseInt(spinner.getValue().toString()) > 0){
 					cc.adicionarItem(titulo, Integer.parseInt(spinner.getValue().toString()));
+					dispose();
 				}
 			}
 		});

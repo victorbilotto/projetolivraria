@@ -180,9 +180,12 @@ public class AdicionarLivro extends JFrame {
 						cl.adicionarLivro( tfTitulo.getText(), tfAutor.getText(), tfISBN.getText(), cbCategoria.getSelectedItem().toString(),
 								tfEditora.getText(), tfResumo.getText(), tfPreco.getText(), cbFormato.getSelectedItem().toString(), 
 								tfPaginas.getText(), tfData.getText(), tfIndice.getText() );
-						JOptionPane.showMessageDialog(null, "Livro adiconado com sucesso");
+						JOptionPane.showMessageDialog(null, "Livro adicionado com sucesso.");
+						
 					} catch (ParseException e) {
 						e.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Erro ao adicionar o livro.");
+						
 					}
 					
 				}else {
