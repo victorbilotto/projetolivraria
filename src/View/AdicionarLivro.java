@@ -185,7 +185,7 @@ public class AdicionarLivro extends JFrame {
 				
 				boolean vazio = true;
 				for(int i = 0; i < valores.length; i++){
-					if(valores[i] != null && !valores[i].trim().isEmpty() && valores[i].trim().equals("")){
+					if(valores[i] != null && !valores[i].trim().isEmpty() && !valores[i].trim().equals("")){
 						vazio = false; 
 					}
 				}	
