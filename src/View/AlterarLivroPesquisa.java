@@ -99,7 +99,7 @@ public class AlterarLivroPesquisa extends JFrame {
 						vazio = false;
 				if(!vazio) {
 					ControleLivro cl = new ControleLivro();
-					cl.pesquisarLivros(valores, tabelaLivros);
+					cl.popularTabela(valores, tabelaLivros);
 				} else {
 					JOptionPane.showMessageDialog(null, "Preencha pelo menos um campo.");
 				}
@@ -199,6 +199,7 @@ public class AlterarLivroPesquisa extends JFrame {
 				    return; 
 				}
 				String escolhido = tabelaLivros.getValueAt(selecionada, 0).toString();
+				System.out.println(escolhido);
 				try {
 					cl.alteraEscolhido(escolhido);
 				} catch (Exception e1) {

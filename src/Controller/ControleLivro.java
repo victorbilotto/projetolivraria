@@ -128,6 +128,57 @@ public class ControleLivro extends JFrame{
 		dao.atualizar(l);
 		}
 	
+	public void popularTabela(String[] valores, JTable tabelaLivros){
+
+		DAOLivro dao = new DAOLivroImpl();
+		List<Livro> listaLivro = dao.pesquisarLivro(valores);
+		
+		tabelaLivros.setModel(new DefaultTableModel(
+				new Object[][] {},
+				new String[] {
+						"ISBN", "Titulo", "Autor", "Editora", "Categoria"
+				}
+			) {
+				boolean[] columnEditables = new boolean[] {
+					false, false, false, false, false
+				};
+				public boolean isCellEditable(int row, int column) {
+					return columnEditables[column];
+				}
+		});
+		tabelaLivros.getColumnModel().getColumn(0).setResizable(false);
+		tabelaLivros.getColumnModel().getColumn(0).setPreferredWidth(222);
+		tabelaLivros.getColumnModel().getColumn(1).setResizable(false);
+		tabelaLivros.getColumnModel().getColumn(1).setPreferredWidth(89);
+		tabelaLivros.getColumnModel().getColumn(2).setResizable(false);
+		tabelaLivros.getColumnModel().getColumn(2).setPreferredWidth(85);
+		tabelaLivros.getColumnModel().getColumn(3).setResizable(false);
+		tabelaLivros.getColumnModel().getColumn(3).setPreferredWidth(100);
+		tabelaLivros.getColumnModel().getColumn(4).setResizable(false);
+		tabelaLivros.getColumnModel().getColumn(4).setPreferredWidth(64);
+		
+		if(listaLivro.size()<=0){
+			JOptionPane.showMessageDialog(null, "Nenhum livro encontrado, faça uma nova busca");
+		}
+		
+		DefaultTableModel modelo = (DefaultTableModel) tabelaLivros.getModel();
+		if(modelo.getRowCount() > 0 ){
+			modelo.setRowCount(0);
+		}
+		
+		
+		for(Livro l: listaLivro){
+			Object[] objeto = new Object[5];
+			objeto[1] = l.getTitulo();
+			objeto[0] = l.getISBN();
+			objeto[2] = l.getAutor();
+			objeto[3] = l.getEditora();
+			objeto[4] = l.getCategoria();
+			modelo.addRow(objeto);
+		}
+		
+	}
+	
 	public void populaTabela(String titulo, JTable tabela)
 	{
 		
@@ -151,8 +202,8 @@ public class ControleLivro extends JFrame{
 		
 		for(Livro l: listaLivro){
 			Object[] objeto = new Object[4];
-			objeto[0] = l.getTitulo();
-			objeto[1] = l.getISBN();
+			objeto[1] = l.getTitulo();
+			objeto[0] = l.getISBN();
 			objeto[2] = l.getAutor();
 			objeto[3] = l.getEditora();
 			modelo.addRow(objeto);
