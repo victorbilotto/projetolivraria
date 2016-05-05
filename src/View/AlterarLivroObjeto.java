@@ -39,7 +39,7 @@ public class AlterarLivroObjeto extends JFrame {
 	
 	String data;
 	
-	public AlterarLivroObjeto(String titulo, String autor, String ISBN, String categoria, String editora,
+	public AlterarLivroObjeto(int id, String titulo, String autor, String ISBN, String categoria, String editora,
 			String resumo, double preco, String formato, int paginas, String result, String indice) {
 		setTitle("Adicionar Livro");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -122,7 +122,6 @@ public class AlterarLivroObjeto extends JFrame {
 		tfAutor.setText(autor);
 		
 		tfISBN = new JTextField();
-		tfISBN.setEditable(false);
 		tfISBN.setBounds(84, 70, 225, 20);
 		contentPane.add(tfISBN);
 		tfISBN.setColumns(10);
@@ -164,16 +163,13 @@ public class AlterarLivroObjeto extends JFrame {
 		tfIndice.setColumns(10);
 		tfIndice.setText(indice);
 
-		
+		int codigoId = id;
 		JButton btnAlterar = new JButton("Alterar");
 		btnAlterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0){
-				ControleLivro cl = new ControleLivro();
-
-				
-				
+				ControleLivro cl = new ControleLivro();				
 				try{
-					cl.alterar( tfTitulo.getText(), tfAutor.getText(), tfISBN.getText(), cbCategoria.getSelectedItem().toString(),
+					cl.alterar( codigoId, tfTitulo.getText(), tfAutor.getText(), tfISBN.getText(), cbCategoria.getSelectedItem().toString(),
 							tfEditora.getText(), tfResumo.getText(), tfPreco.getText(), cbFormato.getSelectedItem().toString(), 
 							tfPaginas.getText(), tfData.getText(), tfIndice.getText() );
 					JOptionPane.showMessageDialog(null,  "Livro alterado com sucesso");

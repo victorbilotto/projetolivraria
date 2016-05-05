@@ -23,6 +23,7 @@ public class DAOLivroImpl implements DAOLivro{
 			"values (?,?,?,?,?,?,?,?,?,?,?)";
 	final String atualiza ="UPDATE livro SET" +
 			" titulo = ?," +
+			" ISBN = ?," +
 			" autor = ?," +
 			" categoria = ?," +
 			" editora = ?," +
@@ -32,7 +33,7 @@ public class DAOLivroImpl implements DAOLivro{
 			" numPaginas = ?,"+
 			" dataPublicacao =?,"+
 			" indice = ?"+
-			" WHERE ISBN = ?";
+			" WHERE id_livro = ?";
 	final String pesquisaUnica = "SELECT * FROM livro where isbn like ?";
 	
 	@Override
@@ -189,22 +190,23 @@ public class DAOLivroImpl implements DAOLivro{
 	}
 
 	@Override
-	public void atualizar(Livro l) {
+	public void atualizar(Livro l, int id) {
 		try {
 			Connection con =  DataBaseConnection.getConnection();
 			
 			PreparedStatement stm = con.prepareStatement( atualiza );			
 			stm.setString(1, l.getTitulo());
-			stm.setString(2, l.getAutor());
-			stm.setString(3, l.getCategoria());
-			stm.setString(4, l.getEditora());
-			stm.setString(5, l.getResumo());
-			stm.setDouble(6, l.getPreco());
-			stm.setString(7, l.getFormatoLivro());
-			stm.setInt(8, l.getNumPaginas());
-			stm.setDate(9, new java.sql.Date(l.getDataPublicacao().getTime()));
-			stm.setString(10, l.getIndice());
-			stm.setString(11, l.getISBN());
+			stm.setString(3, l.getAutor());
+			stm.setString(4, l.getCategoria());
+			stm.setString(5, l.getEditora());
+			stm.setString(6, l.getResumo());
+			stm.setDouble(7, l.getPreco());
+			stm.setString(8, l.getFormatoLivro());
+			stm.setInt(9, l.getNumPaginas());
+			stm.setDate(10, new java.sql.Date(l.getDataPublicacao().getTime()));
+			stm.setString(11, l.getIndice());
+			stm.setString(2, l.getISBN());
+			stm.setInt(12, id);
 			stm.executeUpdate();
 			con.close();
 		} catch (SQLException e) {
@@ -254,6 +256,7 @@ public class DAOLivroImpl implements DAOLivro{
 				l.setNumPaginas(Integer.parseInt(rs.getString("numPaginas")));
 				l.setDataPublicacao(rs.getDate("dataPublicacao"));
 				l.setIndice(rs.getString("indice"));
+				l.setId(rs.getInt("id_livro"));
 			}
 
 		} catch (SQLException e) {

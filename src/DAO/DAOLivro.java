@@ -12,7 +12,7 @@ public interface DAOLivro {
 	public List<Livro> pesquisarCategoria(String categoria);
 	public List<Livro> pesquisarLivro(String[] valores);
 	public void adicionarLivro(Livro l);
-	public void atualizar( Livro l);
+	public void atualizar( Livro l, int codigoId);
 	public void remover( String isbn);
 	public Livro pesquisa(String isbn);
 }

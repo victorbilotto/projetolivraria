@@ -103,7 +103,7 @@ public class ControleLivro extends JFrame{
 		dao.remover(isbn);
 	}
 	
-	public void alterar(String titulo, String autor, String ISBN, String categoria, String editora,
+	public void alterar(int codigoId, String titulo, String autor, String ISBN, String categoria, String editora,
 			String resumo, String preco, String formato, String paginas, String data, String indice)
 		{
 		Livro l = new Livro();
@@ -125,7 +125,7 @@ public class ControleLivro extends JFrame{
 		}
 		l.setIndice(indice);
 		DAOLivro dao = new DAOLivroImpl();
-		dao.atualizar(l);
+		dao.atualizar(l, codigoId);
 		}
 	
 	public void popularTabela(String[] valores, JTable tabelaLivros){
@@ -214,10 +214,9 @@ public class ControleLivro extends JFrame{
 		SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy");
 		String result = out.format(in.parse(String.valueOf(l.getDataPublicacao())));  
 		
-		
-		AlterarLivroObjeto al = new AlterarLivroObjeto(l.getTitulo(),l.getAutor(), l.getISBN(),l.getCategoria(),
-				l.getEditora(), l.getResumo(), l.getPreco(), l.getFormatoLivro(), l.getNumPaginas(), result,
-				l.getIndice());
+
+		AlterarLivroObjeto al = new AlterarLivroObjeto(l.getId(), l.getTitulo(), l.getAutor(), l.getISBN(), l.getCategoria()
+				,l.getEditora(), l.getResumo(), l.getPreco(), l.getFormatoLivro(), l.getNumPaginas(), result, l.getIndice());
 		al.setVisible(true);
 	}
 }

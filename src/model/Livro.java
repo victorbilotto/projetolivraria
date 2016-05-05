@@ -70,6 +70,13 @@ public class Livro {
 	public void setIndice(String indice) {
 		this.indice = indice;
 	}
+	int id;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	String titulo;
 	String autor;
 	String ISBN;
