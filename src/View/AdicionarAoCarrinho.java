@@ -17,16 +17,17 @@ import javax.swing.text.StyleConstants;
 import Controller.ControleCarrinho;
 
 import javax.swing.event.ChangeEvent;
+
+import java.awt.EventQueue;
 import java.awt.SystemColor;
 
 @SuppressWarnings("serial")
 public class AdicionarAoCarrinho extends JFrame {
+	
 
 	private JPanel contentPane;
 
-	/**
-	 * Create the frame.
-	 */
+
 	public AdicionarAoCarrinho(String titulo) {
 		setTitle("Adicionar ao Carrinho");
 		setResizable(false);
