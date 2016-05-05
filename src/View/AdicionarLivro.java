@@ -165,7 +165,7 @@ public class AdicionarLivro extends JFrame {
 			e.printStackTrace();
 		}
 		
-		tfIndice = new JtextFieldSomenteLetras();
+		tfIndice = new JTextFieldTudo();
 		tfIndice.setBounds(84, 346, 450, 70);
 		contentPane.add(tfIndice);
 		tfIndice.setColumns(10);
