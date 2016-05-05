@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.event.CaretEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -218,5 +219,49 @@ public class ControleLivro extends JFrame{
 		AlterarLivroObjeto al = new AlterarLivroObjeto(l.getId(), l.getTitulo(), l.getAutor(), l.getISBN(), l.getCategoria()
 				,l.getEditora(), l.getResumo(), l.getPreco(), l.getFormatoLivro(), l.getNumPaginas(), result, l.getIndice());
 		al.setVisible(true);
+	}
+	public int escolheFormato(String formato) {
+	
+		switch(formato){
+		case "Brochura":
+			return 0;
+		case "Capa dura":
+			return 1;
+		default:
+			return 0;
+		}
+		
+		
+	}
+	public int escolheCategoria(String categoria) {
+		switch(categoria){
+		case "Fantasia":
+			return 0;
+		case "Ficção":
+			return 1;
+		case "Autoajuda":
+			return 2;
+		case "Educação":
+			return 3;
+		case "Ação":
+			return 4;
+		case "Aventura":
+			return 5;
+		case "Drama":
+			return 6;
+		case "Romance":
+			return 7;
+		case "Terror":
+			return 8;
+		case "Detetive":
+			return 9;
+		case "Software":
+			return 10;
+		default:
+			return 0;
+		}
+		
+	
+		
 	}
 }

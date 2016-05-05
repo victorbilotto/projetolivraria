@@ -1,13 +1,13 @@
 package View;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
 import Controller.ControleLivro;
+import Controller.JTextAreaSomenteTexto;
+import Controller.JTextAreaTudo;
 import Controller.JTextFieldTudo;
 import Controller.JtextFieldSomenteLetras;
 import Controller.JtextFieldSomenteNumeros;
@@ -23,6 +23,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.DefaultComboBoxModel;
 import model.EnumCategoria;
+import javax.swing.JTextArea;
 
 public class AdicionarLivro extends JFrame {
 
@@ -31,11 +32,9 @@ public class AdicionarLivro extends JFrame {
 	private JTextField tfAutor;
 	private JTextField tfISBN;
 	private JTextField tfEditora;
-	private JTextField tfResumo;
 	private JTextField tfPreco;
 	private JTextField tfPaginas;
 	private JTextField tfData;
-	private JTextField tfIndice;
 
 	/**
 	 * Create the frame.
@@ -124,11 +123,6 @@ public class AdicionarLivro extends JFrame {
 		contentPane.add(tfEditora);
 		tfEditora.setColumns(10);
 		
-		tfResumo = new  JtextFieldSomenteLetras();
-		tfResumo.setBounds(84, 145, 450, 90);
-		contentPane.add(tfResumo);
-		tfResumo.setColumns(10);
-		
 		tfPreco = new JtextFieldSomenteNumeros();
 		tfPreco.setBounds(84, 246, 86, 20);
 		contentPane.add(tfPreco);
@@ -138,6 +132,14 @@ public class AdicionarLivro extends JFrame {
 		tfPaginas.setBounds(84, 296, 86, 20);
 		contentPane.add(tfPaginas);
 		tfPaginas.setColumns(10);
+		
+		JTextArea tfResumo = new JTextAreaSomenteTexto();
+		tfResumo.setBounds(84, 148, 450, 90);
+		contentPane.add(tfResumo);
+		
+		JTextArea tfIndice = new JTextAreaTudo();
+		tfIndice.setBounds(84, 349, 450, 68);
+		contentPane.add(tfIndice);
 		
 		try {
 		MaskFormatter data = new MaskFormatter("##/##/####");
@@ -149,11 +151,6 @@ public class AdicionarLivro extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		tfIndice = new JTextFieldTudo();
-		tfIndice.setBounds(84, 346, 450, 70);
-		contentPane.add(tfIndice);
-		tfIndice.setColumns(10);
 		
 		JButton btnAdicionar = new JButton("Adicionar");
 		btnAdicionar.addActionListener(new ActionListener() {
@@ -173,7 +170,7 @@ public class AdicionarLivro extends JFrame {
 					if(valores[i] != null && !valores[i].trim().isEmpty() && !tfTitulo.getText().trim().equals("") && !tfAutor.getText().trim().equals("") &&
 							!tfISBN.getText().trim().equals("") && !tfEditora.getText().trim().equals("") && !tfResumo.getText().trim().equals("") &&
 							!tfPreco.getText().trim().equals("") && !tfPaginas.getText().trim().equals("") &&
-							!tfData.getText().trim().equals("") && !tfIndice.getText().trim().equals("")  ){
+							!tfData.getText().trim().equals("") && !tfIndice.getText().trim().equals("") && !tfData.getText().equals("  /  /    ")  ){
 						vazio = false; 
 					}
 				}	
@@ -215,5 +212,7 @@ public class AdicionarLivro extends JFrame {
 		});
 		btnLimpar.setBounds(455, 427, 89, 23);
 		contentPane.add(btnLimpar);
+		
+
 	}
 }

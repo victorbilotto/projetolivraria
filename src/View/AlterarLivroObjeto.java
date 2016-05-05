@@ -3,10 +3,13 @@ package View;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
 import Controller.ControleLivro;
+import Controller.JTextAreaSomenteTexto;
+import Controller.JTextAreaTudo;
 import model.EnumCategoria;
 
 import javax.swing.JLabel;
@@ -101,13 +104,17 @@ public class AlterarLivroObjeto extends JFrame {
 		cbFormato.setModel(new DefaultComboBoxModel(new String[] {"Brochura", "Capa dura"}));
 		cbFormato.setBounds(84, 271, 225, 20);
 		contentPane.add(cbFormato);
-		cbFormato.setSelectedItem(formato);
+		int formatoIndice = cl.escolheFormato(formato);
+		System.out.println(formatoIndice);
+		cbFormato.setSelectedIndex(formatoIndice);
 		
 		JComboBox cbCategoria = new JComboBox();
 		cbCategoria.setModel(new DefaultComboBoxModel(EnumCategoria.values()));
 		cbCategoria.setBounds(84, 95, 225, 20);
 		contentPane.add(cbCategoria);
-		cbCategoria.setSelectedItem(categoria);
+		int categoriaIndice = cl.escolheCategoria(categoria);
+		System.out.println(categoriaIndice);
+		cbCategoria.setSelectedIndex(categoriaIndice);
 		
 		tfTitulo = new JTextField();
 		tfTitulo.setBounds(84, 20, 450, 20);
@@ -133,12 +140,7 @@ public class AlterarLivroObjeto extends JFrame {
 		contentPane.add(tfEditora);
 		tfEditora.setColumns(10);
 		tfEditora.setText(editora);
-		
-		tfResumo = new JTextField();
-		tfResumo.setBounds(84, 145, 450, 90);
-		contentPane.add(tfResumo);
-		tfResumo.setColumns(10);
-		tfResumo.setText(resumo);
+
 		
 		tfPreco = new JTextField();
 		tfPreco.setBounds(84, 246, 86, 20);
@@ -157,10 +159,14 @@ public class AlterarLivroObjeto extends JFrame {
 		contentPane.add(tfData);
 		tfData.setColumns(10);
 		
-		tfIndice = new JTextField();
-		tfIndice.setBounds(84, 346, 450, 70);
+		JTextArea tfResumo = new JTextAreaSomenteTexto();
+		tfResumo.setBounds(84, 148, 450, 90);
+		contentPane.add(tfResumo);
+		tfResumo.setText(resumo);
+		
+		JTextArea tfIndice = new JTextAreaTudo();
+		tfIndice.setBounds(84, 349, 450, 68);
 		contentPane.add(tfIndice);
-		tfIndice.setColumns(10);
 		tfIndice.setText(indice);
 
 		int codigoId = id;
